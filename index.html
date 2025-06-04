@@ -11,12 +11,12 @@
         body { font-family: 'Sarabun', sans-serif; background-color: #f5f5f5; }
         .tab-active { background-color: #2E7D32; color: white; border-bottom: 3px solid #FFC107; }
         .hidden { display: none; }
-        /* เพิ่มสไตล์สำหรับ readonly input ให้ดูเหมือน text ปกติ แต่คลิกไม่ได้ */
         input[readonly].bg-gray-100 {
-            background-color: #f9fafb; /* สีพื้นหลังอ่อนๆ */
+            background-color: #f9fafb; 
             cursor: default;
-            border-color: #d1d5db; /* สีขอบเทาอ่อน */
+            border-color: #d1d5db; 
         }
+        #imagePreview { max-width: 200px; max-height: 200px; margin-top: 0.5rem; border: 1px solid #ddd; padding: 5px; }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -47,8 +47,7 @@
                     <form id="repairForm">
                         <input type="hidden" id="userId">
                         <input type="hidden" id="lineDisplayNameFromProfile">
-
-                        <div id="userInfoSection" class="mb-6 pb-4 border-b hidden">
+                        <input type="hidden" id="registeredFullName"> <input type="hidden" id="registeredPosition"> <input type="hidden" id="registeredDepartment"> <div id="userInfoSection" class="mb-6 pb-4 border-b hidden">
                             <h3 class="text-md font-medium text-gray-700 mb-3 flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
@@ -157,7 +156,7 @@
                                 </div>
                                 <div class="md:col-span-2">
                                     <label class="block text-sm font-medium text-gray-700 mb-1">สถานที่ตั้ง (อาคาร/ห้อง) <span class="text-red-500">*</span></label>
-                                    <input type="text" id="equipmentLocation" class="w-full px-3 py-2 border border-gray-300 rounded-md" required placeholder="เช่น อาคาร 5 ชั้น 2 ห้อง 203">
+                                    <input type="text" id="equipmentLocation" class="w-full px-3 py-2 border border-gray-300 rounded-md" required placeholder="กรุณาระบุ หรือจะดึงจากข้อมูลลงทะเบียน">
                                 </div>
                             </div>
                         </div>
@@ -174,6 +173,18 @@
                                 <textarea id="problemDetails" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-md" required></textarea>
                             </div>
                         </div>
+
+                        <div class="mb-6 border-t pt-4">
+                            <h3 class="text-md font-medium text-gray-700 mb-3 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                                แนบรูปภาพ (ถ้ามี)
+                            </h3>
+                            <div>
+                                <input type="file" id="imageUpload" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100">
+                                <img id="imagePreview" class="hidden" src="#" alt="ตัวอย่างรูปภาพที่เลือก">
+                            </div>
+                        </div>
+
 
                         <div class="mt-6 border-t pt-4">
                             <h3 class="text-md font-medium text-gray-700 mb-2 flex items-center">
@@ -217,25 +228,54 @@
             </div>
             <div id="loadingMessage" class="text-center text-gray-500 mt-4 hidden"><p>กำลังโหลด...</p></div>
         </main>
+         <footer class="bg-gray-100 border-t border-gray-200 py-4 mt-auto">
+            <div class="container mx-auto px-4 text-center text-sm text-gray-600">
+                <p id="footerText">© 2024 ระบบแจ้งซ่อมครุภัณฑ์คอมพิวเตอร์ | ศูนย์เทคโนโลยีสารสนเทศ</p>
+            </div>
+        </footer>
     </div>
 
     <script>
+    let imageDataBase64 = ""; // Store base64 image data
+    let imageFileName = "";
+    let imageMimeType = "";
+
     document.addEventListener('DOMContentLoaded', async function() {
         const submitButton = document.getElementById('submitButton');
         const loadingMessage = document.getElementById('loadingMessage');
         const userInfoSection = document.getElementById('userInfoSection');
-        
-        // Elements for displaying user data from registration
         const displayFullNameInput = document.getElementById('displayFullNameInput');
         const displayPositionInput = document.getElementById('displayPositionInput');
         const equipmentLocationInput = document.getElementById('equipmentLocation');
-
+        const imageUpload = document.getElementById('imageUpload');
+        const imagePreview = document.getElementById('imagePreview');
 
         loadingMessage.classList.remove('hidden');
         submitButton.disabled = true;
 
+        // Image Upload Preview
+        imageUpload.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                imageFileName = file.name;
+                imageMimeType = file.type;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imageDataBase64 = e.target.result; // Full base64 string with prefix
+                    imagePreview.classList.remove('hidden');
+                }
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.classList.add('hidden');
+                imagePreview.src = "#";
+                imageDataBase64 = "";
+                imageFileName = "";
+                imageMimeType = "";
+            }
+        });
+
         try {
-            // !!! PASTE YOUR *NEW* LIFF ID FOR REPAIR SYSTEM HERE !!!
             await liff.init({ liffId: "2007495650-DVW3AjjM" }); 
             
             if (!liff.isLoggedIn()) {
@@ -274,29 +314,67 @@
             const formData = {
                 userId: document.getElementById('userId').value,
                 lineDisplayName: document.getElementById('lineDisplayNameFromProfile').value,
-                // FullName from Data_LIFF is in displayFullNameInput.value (but it's readonly)
-                // We'll send contactPhone which might be pre-filled or user-edited
+                registeredFullName: document.getElementById('registeredFullName').value, // Send registered name
+                registeredPosition: document.getElementById('registeredPosition').value, // Send registered position
+                registeredDepartment: document.getElementById('registeredDepartment').value, // Send registered department
                 contactPhone: document.getElementById('contactPhone').value,
                 equipmentType: document.getElementById('equipmentType').value,
                 equipmentId: document.getElementById('equipmentId').value || 'N/A',
                 equipmentBrand: document.getElementById('equipmentBrand').value || 'N/A',
-                equipmentLocation: document.getElementById('equipmentLocation').value, // User might have edited this
+                equipmentLocation: document.getElementById('equipmentLocation').value,
                 problemDetails: document.getElementById('problemDetails').value,
                 repairConditionsAccepted: document.getElementById('repairConditionsAccepted').checked,
-                pdpaConsentRepair: document.getElementById('pdpaConsentRepair').checked
+                pdpaConsentRepair: document.getElementById('pdpaConsentRepair').checked,
+                // Image data
+                imageData: imageDataBase64, // Send the full base64 string
+                imageFileName: imageFileName,
+                imageMimeType: imageMimeType
             };
-
-            // !!! PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE !!!
+            
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbzc5WNqmqUVpubQ0QfFkieiJCx1ZlgWdiDJhHPj9pPpnYI4Uj0rLehc7JCSm7FYbI4v/exec'; 
             const queryParams = new URLSearchParams({
                 callback: 'jsonpCallbackRepair', 
                 action: 'requestRepair', 
-                ...formData
+                // Spread operator might hit URL length limits with base64 image
+                // Send each parameter explicitly
+                userId: formData.userId,
+                lineDisplayName: formData.lineDisplayName,
+                registeredFullName: formData.registeredFullName,
+                registeredPosition: formData.registeredPosition,
+                registeredDepartment: formData.registeredDepartment,
+                contactPhone: formData.contactPhone,
+                equipmentType: formData.equipmentType,
+                equipmentId: formData.equipmentId,
+                equipmentBrand: formData.equipmentBrand,
+                equipmentLocation: formData.equipmentLocation,
+                problemDetails: formData.problemDetails,
+                repairConditionsAccepted: formData.repairConditionsAccepted,
+                pdpaConsentRepair: formData.pdpaConsentRepair,
+                imageFileName: formData.imageFileName,
+                imageMimeType: formData.imageMimeType
+                // imageData is too long for GET, will be sent in POST body if we switch from JSONP
             }).toString();
+
+            // For image data, JSONP (GET) is not suitable due to URL length limits.
+            // We need to use a POST request. google.script.run is not available if HTML is not served by GAS.
+            // A common workaround is to send metadata via GET and then use a separate mechanism or endpoint for file upload,
+            // OR, if the image is small enough, send only the base64 data string.
+            // For now, let's send image metadata and the base64 data. If it's too long, GAS will truncate it.
+            // This is a limitation of JSONP for large data.
+            
+            let fullScriptSrc = `${scriptUrl}?${queryParams}`;
+            if (formData.imageData) {
+                 // We need to be careful with URL length. Let's try appending it.
+                 // This is NOT ideal for large images. A POST request would be better.
+                 // Consider sending a flag and having user upload to a GAS form if too large.
+                 // For now, trying to send it directly.
+                 fullScriptSrc += `&imageData=${encodeURIComponent(formData.imageData)}`;
+            }
+
 
             const script = document.createElement('script');
             script.id = 'jsonp-script-repair-' + Date.now(); 
-            script.src = `${scriptUrl}?${queryParams}`;
+            script.src = fullScriptSrc;
             script.onerror = function() {
                 Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาดในการเชื่อมต่อ', text: 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้ง' });
                 submitButton.disabled = false;
@@ -307,7 +385,6 @@
 
         function fetchUserDetails(userId) {
             loadingMessage.textContent = 'กำลังดึงข้อมูลผู้ลงทะเบียน...';
-            // !!! PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE !!!
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbzc5WNqmqUVpubQ0QfFkieiJCx1ZlgWdiDJhHPj9pPpnYI4Uj0rLehc7JCSm7FYbI4v/exec'; 
             const callbackName = 'jsonpCallbackUserDetails_' + Date.now(); 
 
@@ -326,11 +403,8 @@
                         showConfirmButton: false,
                         timer: 2000
                     });
-                } else if (response && response.error) {
-                    console.error("Error fetching user details: ", response.error);
-                    Swal.fire({icon: 'warning', title: 'ไม่พบข้อมูลลงทะเบียน', text: 'ไม่สามารถดึงข้อมูลการลงทะเบียนเดิมของคุณได้ กรุณากรอกเบอร์ติดต่อ'});
                 } else {
-                     Swal.fire({icon: 'info', title: 'ไม่พบข้อมูลลงทะเบียน', text: 'กรุณากรอกเบอร์ติดต่อสำหรับแจ้งซ่อมนี้'});
+                     Swal.fire({icon: 'info', title: 'ไม่พบข้อมูลลงทะเบียน', text: 'ไม่พบข้อมูลการลงทะเบียนเดิม กรุณากรอกข้อมูลด้วยตนเอง'});
                 }
                 
                 loadingMessage.classList.add('hidden');
@@ -358,16 +432,15 @@
         function populateFormWithUserData(userData) {
             if (userData.fullName) {
                 displayFullNameInput.value = userData.fullName;
+                document.getElementById('registeredFullName').value = userData.fullName; // Store for submission
             }
             if (userData.position) {
                 displayPositionInput.value = userData.position;
+                document.getElementById('registeredPosition').value = userData.position; // Store for submission
             }
             if (userData.department) {
-                // Pre-fill placeholder of equipmentLocation, user can edit or add room details
                 equipmentLocationInput.placeholder = userData.department + " (กรุณาระบุห้อง/ชั้น เพิ่มเติม)";
-                // If the actual location from Data_LIFF is more detailed, you might want to set its value directly
-                // For example, if userData.location is like "คณะวิทยาศาสตร์ ตึก 5 ห้อง 501"
-                // equipmentLocationInput.value = userData.location; 
+                document.getElementById('registeredDepartment').value = userData.department; // Store for submission
             }
             if (userData.phone) {
                 document.getElementById('contactPhone').value = userData.phone;
@@ -379,10 +452,9 @@
 
     function jsonpCallbackRepair(response) { 
         document.getElementById('submitButton').disabled = false;
-        // Minimal script tag cleanup - more robust cleanup would involve passing the script.id
         const scriptTags = document.querySelectorAll('script[id^="jsonp-script-repair-"]');
         scriptTags.forEach(tag => tag.remove());
-        delete window['jsonpCallbackRepair']; // Assuming only one callback of this name at a time
+        delete window['jsonpCallbackRepair']; 
 
         if (response.success) {
             Swal.fire({
@@ -394,6 +466,9 @@
                     liff.closeWindow();
                 } else {
                     document.getElementById('repairForm').reset();
+                    document.getElementById('imagePreview').classList.add('hidden');
+                    document.getElementById('imagePreview').src = "#";
+                    imageDataBase64 = ""; imageFileName = ""; imageMimeType = "";
                     userInfoSection.classList.add('hidden'); 
                 }
             });
