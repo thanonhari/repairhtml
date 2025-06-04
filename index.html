@@ -33,34 +33,96 @@
         <main class="flex-grow container mx-auto px-4 py-6">
             <div class="flex border-b border-gray-200 mb-6">
                 <button id="repairTab" class="tab-active px-4 py-2 font-medium text-sm rounded-t-lg">แจ้งซ่อม</button>
-                </div>
+            </div>
 
             <div id="repairContent">
                 <div class="bg-white rounded-lg shadow-md p-6">
                     <h2 class="text-xl font-semibold text-green-800 mb-4">แบบฟอร์มแจ้งซ่อม</h2>
                     <form id="repairForm">
                         <input type="hidden" id="userId">
-                        <input type="hidden" id="lineDisplayName">
-
+                        <input type="hidden" id="lineDisplayNameFromProfile"> <div id="userInfoSection" class="mb-6 pb-4 border-b hidden">
+                            <h3 class="text-md font-medium text-gray-700 mb-2">ข้อมูลผู้แจ้ง (จากระบบลงทะเบียน)</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                                <p><strong>ชื่อ-นามสกุล:</strong> <span id="displayFullName"></span></p>
+                                <p><strong>ตำแหน่ง:</strong> <span id="displayPosition"></span></p>
+                                <p><strong>หน่วยงาน/คณะ:</strong> <span id="displayDepartment"></span></p>
+                            </div>
+                        </div>
                         <div class="mb-6 border-t pt-4">
-                            <h3 class="text-md font-medium text-gray-700 mb-3">ข้อมูลผู้แจ้งและอุปกรณ์</h3>
+                             <h3 class="text-md font-medium text-gray-700 mb-3">ข้อมูลครุภัณฑ์และปัญหา</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label for="contactPhone" class="block text-sm font-medium text-gray-700 mb-1">เบอร์โทรภายในสำหรับติดต่อ <span class="text-red-500">*</span></label>
                                     <input type="text" id="contactPhone" maxlength="4" pattern="\d{4}" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
                                 </div>
                                 <div>
-                                    <label for="equipmentType" class="block text-sm font-medium text-gray-700 mb-1">ประเภทครุภัณฑ์ <span class="text-red-500">*</span></label>
-                                    <select id="equipmentType" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
-                                        <option value="" disabled selected>-- เลือกประเภท --</option>
-                                        <option value="คอมพิวเตอร์ตั้งโต๊ะ">คอมพิวเตอร์ตั้งโต๊ะ</option>
-                                        <option value="โน้ตบุ๊ก">โน้ตบุ๊ก</option>
-                                        <option value="เครื่องพิมพ์">เครื่องพิมพ์</option>
-                                        <option value="สแกนเนอร์">สแกนเนอร์</option>
-                                        <option value="โปรเจคเตอร์">โปรเจคเตอร์</option>
-                                        <option value="อุปกรณ์เครือข่าย (Router/Switch)">อุปกรณ์เครือข่าย (Router/Switch)</option>
-                                        <option value="อื่นๆ">อื่นๆ</option>
-                                    </select>
+                                    <label for="equipmentType" class="block text-sm font-medium text-gray-700 mb-1">ชื่อครุภัณฑ์/ประเภท <span class="text-red-500">*</span></label>
+                                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md" id="equipmentType" name="equipmentType" list="equipmentList" required placeholder="พิมพ์เพื่อค้นหาหรือเลือก">
+                                    <datalist id="equipmentList">
+                                        <option value="HP Computer"></option>
+                                        <option value="HP All-In-One Computer"></option>
+                                        <option value="Dell Computer"></option>
+                                        <option value="Dell All-In-One Computer"></option>
+                                        <option value="Lenovo All-In-One Computer"></option>
+                                        <option value="Lenovo Computer"></option>
+                                        <option value="Asus Computer"></option>
+                                        <option value="Asus All-In-One Computer"></option>
+                                        <option value="Acer Computer"></option>
+                                        <option value="Acer All-In-One Computer"></option>
+                                        <option value="Computer"></option>
+                                        <option value="Computer All-In-One"></option>
+                                        <option value="HP Printer"></option>
+                                        <option value="HP All-In-One Printer"></option>
+                                        <option value="Canon Printer"></option>
+                                        <option value="Canon All-In-One Printer"></option>
+                                        <option value="Epson Printer"></option>
+                                        <option value="Epson All-In-One Printer"></option>
+                                        <option value="Brother Printer"></option>
+                                        <option value="Brother All-In-One Printer"></option>
+                                        <option value="Xerox Printer"></option>
+                                        <option value="Fuji Xerox Printer"></option>
+                                        <option value="Fujifilm Printer"></option>
+                                        <option value="Xerox All-In-One Printer"></option>
+                                        <option value="Printer"></option>
+                                        <option value="Printer All-In-One"></option>
+                                        <option value="Printer Fujifilm"></option>
+                                        <option value="HP Notebook"></option>
+                                        <option value="Dell Notebook"></option>
+                                        <option value="Lenovo Notebook"></option>
+                                        <option value="Asus Notebook"></option>
+                                        <option value="Acer Notebook"></option>
+                                        <option value="Notebook"></option>
+                                        <option value="Samsung Monitor"></option>
+                                        <option value="LG Monitor"></option>
+                                        <option value="Dell Monitor"></option>
+                                        <option value="BenQ Monitor"></option>
+                                        <option value="Asus Monitor"></option>
+                                        <option value="Monitor"></option>
+                                        <option value="HP Scanner"></option>
+                                        <option value="Canon Scanner"></option>
+                                        <option value="Epson Scanner"></option>
+                                        <option value="Brother Scanner"></option>
+                                        <option value="Xerox Scanner"></option>
+                                        <option value="Scanner"></option>
+                                        <option value="เครื่องสำรองไฟ"></option>
+                                        <option value="UPS"></option>
+                                        <option value="โทรศัพท์ VOIP"></option>
+                                        <option value="โทรศัพท์ IP Phone"></option>
+                                        <option value="โทรศัพท์ตั้งโต๊ะ"></option>
+                                        <option value="Sharp เครื่องถ่ายเอกสาร"></option>
+                                        <option value="Canon เครื่องถ่ายเอกสาร"></option>
+                                        <option value="Fuji Xerox เครื่องถ่ายเอกสาร"></option>
+                                        <option value="เครื่องถ่ายเอกสารระบบเครือข่าย"></option>
+                                        <option value="สาย LAN"></option>
+                                        <option value="สายโทรศัพท์"></option>
+                                        <option value="สายเครื่องพิมพ์"></option>
+                                        <option value="สาย HDMI"></option>
+                                        <option value="สาย VGA"></option>
+                                        <option value="โปรเจคเตอร์"></option>
+                                        <option value="อุปกรณ์เครือข่าย (Router/Switch)"></option>
+                                        <option value="กล้องวงจรปิด"></option>
+                                        <option value="อื่นๆ (ระบุในรายละเอียด)"></option>
+                                    </datalist>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-1">รหัสครุภัณฑ์ (ถ้ามี)</label>
@@ -102,7 +164,7 @@
                              <h3 class="text-md font-medium text-gray-700 mb-2">การยินยอมเกี่ยวกับข้อมูลส่วนบุคคล (PDPA)</h3>
                             <label class="flex items-center">
                                 <input type="checkbox" id="pdpaConsentRepair" name="pdpaConsentRepair" required class="h-5 w-5 text-green-700 focus:ring-green-500 border-gray-300 rounded">
-                                <span class="ml-2 text-sm text-gray-700">ข้าพเจ้ายินยอมให้มหาวิทยาลัยฯ เก็บรวบรวมและใช้ข้อมูลส่วนบุคคลที่เกี่ยวข้องกับการแจ้งซ่อมนี้ ตามนโยบายคุ้มครองข้อมูลส่วนบุคคล <span class="text-red-500">*</span></span>
+                                <span class="ml-2 text-sm text-gray-700">ข้าพเจ้ายินยอมให้มหาวิทยาลัยฯ เก็บรวบรวมและใช้ข้อมูลส่วนบุคคลเพื่อดำเนินการแจ้งซ่อม <span class="text-red-500">*</span></span>
                             </label>
                         </div>
                         
@@ -114,7 +176,7 @@
                     </form>
                 </div>
             </div>
-             <div id="loadingMessage" class="text-center text-gray-500 mt-4 hidden"><p>กำลังโหลด...</p></div>
+            <div id="loadingMessage" class="text-center text-gray-500 mt-4 hidden"><p>กำลังโหลด...</p></div>
         </main>
     </div>
 
@@ -122,6 +184,12 @@
     document.addEventListener('DOMContentLoaded', async function() {
         const submitButton = document.getElementById('submitButton');
         const loadingMessage = document.getElementById('loadingMessage');
+        const userInfoSection = document.getElementById('userInfoSection');
+        const displayFullName = document.getElementById('displayFullName');
+        const displayPosition = document.getElementById('displayPosition');
+        const displayDepartment = document.getElementById('displayDepartment');
+        // const displayUserLocation = document.getElementById('displayUserLocation'); // If you want to display it
+
         loadingMessage.classList.remove('hidden');
         submitButton.disabled = true;
 
@@ -131,28 +199,31 @@
             
             if (!liff.isLoggedIn()) {
                 loadingMessage.textContent = 'กรุณา Login LINE ก่อนใช้งาน';
-                liff.login({ redirectUri: window.location.href }); // Redirect to login
+                liff.login({ redirectUri: window.location.href }); 
                 return; 
             }
             
             const profile = await liff.getProfile();
             document.getElementById('userId').value = profile.userId;
-            document.getElementById('lineDisplayName').value = profile.displayName;
-            document.getElementById('userDisplayName').textContent = profile.displayName;
+            document.getElementById('lineDisplayNameFromProfile').value = profile.displayName; // Store LINE Display Name
+            document.getElementById('userDisplayName').textContent = profile.displayName; // Show LINE Display Name in header
             document.getElementById('userProfilePic').src = profile.pictureUrl;
             
-            loadingMessage.classList.add('hidden');
-            submitButton.disabled = false;
+            fetchUserDetails(profile.userId); // Fetch details after getting LIFF profile
 
         } catch (err) {
             loadingMessage.innerHTML = '<p class="text-red-500">เกิดข้อผิดพลาดในการโหลดข้อมูล LIFF</p>';
             Swal.fire({ icon: 'error', title: 'LIFF Error', text: 'ไม่สามารถโหลดข้อมูลผู้ใช้จาก LINE ได้: ' + err.message });
             console.error("LIFF Init/Profile Error: ", err);
+            // Even if LIFF profile fails, we might proceed without pre-filled data if needed,
+            // but fetching user details relies on userId from profile.
+            // For now, keep button disabled if profile fails, or if fetchUserDetails fails.
+            loadingMessage.classList.add('hidden'); // Hide loading
         }
 
         document.getElementById('repairForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            if(submitButton.disabled) return; // Prevent multiple submissions
+            if(submitButton.disabled) return;
 
             if (!this.checkValidity()) {
                 Swal.fire({ icon: 'error', title: 'ข้อมูลไม่ครบถ้วน', text: 'กรุณากรอกข้อมูลในช่องที่มีเครื่องหมาย * ให้ครบทุกช่อง' });
@@ -164,7 +235,9 @@
 
             const formData = {
                 userId: document.getElementById('userId').value,
-                lineDisplayName: document.getElementById('lineDisplayName').value,
+                lineDisplayName: document.getElementById('lineDisplayNameFromProfile').value, // Send LINE Display Name
+                // FullName from Data_LIFF (shown in displayFullName) is not directly sent unless you add a hidden field for it
+                // The form assumes contactPhone might be different from the registered phone.
                 contactPhone: document.getElementById('contactPhone').value,
                 equipmentType: document.getElementById('equipmentType').value,
                 equipmentId: document.getElementById('equipmentId').value || 'N/A',
@@ -178,28 +251,101 @@
             // !!! PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE !!!
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbzc5WNqmqUVpubQ0QfFkieiJCx1ZlgWdiDJhHPj9pPpnYI4Uj0rLehc7JCSm7FYbI4v/exec'; 
             const queryParams = new URLSearchParams({
-                callback: 'jsonpCallbackRepair', // Use a unique callback name
-                action: 'requestRepair', // This action matches code.gs
+                callback: 'jsonpCallbackRepair',
+                action: 'requestRepair',
                 ...formData
             }).toString();
 
             const script = document.createElement('script');
-            script.id = 'jsonp-script-' + Date.now();
+            script.id = 'jsonp-script-' + Date.now(); // Unique ID for script tag
             script.src = `${scriptUrl}?${queryParams}`;
             script.onerror = function() {
                 Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาดในการเชื่อมต่อ', text: 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้ง' });
                 submitButton.disabled = false;
-                delete window['jsonpCallbackRepair'];
+                if(window['jsonpCallbackRepair']) delete window['jsonpCallbackRepair'];
             };
             document.body.appendChild(script);
         });
-    });
 
-    function jsonpCallbackRepair(response) { // Ensure this callback name is unique
+        function fetchUserDetails(userId) {
+            loadingMessage.textContent = 'กำลังดึงข้อมูลผู้ลงทะเบียน...';
+            // !!! PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE !!!
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbzc5WNqmqUVpubQ0QfFkieiJCx1ZlgWdiDJhHPj9pPpnYI4Uj0rLehc7JCSm7FYbI4v/exec'; 
+            const callbackName = 'jsonpCallbackUserDetails_' + Date.now(); // Unique callback name
+
+            window[callbackName] = function(response) {
+                const scriptElUser = document.getElementById('jsonp-script-userdetails-' + callbackName);
+                if(scriptElUser) document.body.removeChild(scriptElUser);
+                delete window[callbackName];
+
+                if (response && response.found) {
+                    populateFormWithUserData(response);
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'info',
+                        title: 'ดึงข้อมูลผู้แจ้งสำเร็จ',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                } else if (response && response.error) {
+                    console.error("Error fetching user details: ", response.error);
+                    Swal.fire({icon: 'warning', title: 'ไม่พบข้อมูลลงทะเบียน', text: 'ไม่สามารถดึงข้อมูลการลงทะเบียนเดิมของคุณได้ กรุณากรอกเบอร์ติดต่อ'});
+                } else {
+                     Swal.fire({icon: 'info', title: 'ไม่พบข้อมูลลงทะเบียน', text: 'กรุณากรอกเบอร์ติดต่อสำหรับแจ้งซ่อมนี้'});
+                }
+                
+                loadingMessage.classList.add('hidden');
+                submitButton.disabled = false; 
+            };
+
+            const queryParams = new URLSearchParams({
+                callback: callbackName,
+                action: 'getUserDetails',
+                userId: userId
+            }).toString();
+
+            const script = document.createElement('script');
+            script.id = 'jsonp-script-userdetails-' + callbackName; // Unique ID
+            script.src = `${scriptUrl}?${queryParams}`;
+            script.onerror = function() {
+                Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาด', text: 'ไม่สามารถดึงข้อมูลผู้ลงทะเบียนได้' });
+                delete window[callbackName];
+                loadingMessage.classList.add('hidden');
+                submitButton.disabled = false; 
+            };
+            document.body.appendChild(script);
+        }
+
+        function populateFormWithUserData(userData) {
+            if (userData.fullName) {
+                displayFullName.textContent = userData.fullName;
+            }
+            if (userData.position) {
+                displayPosition.textContent = userData.position;
+            }
+            if (userData.department) {
+                displayDepartment.textContent = userData.department;
+            }
+            // if (userData.location) { // Location from original registration
+            //    displayUserLocation.textContent = userData.location;
+            // }
+            if (userData.phone) {
+                document.getElementById('contactPhone').value = userData.phone;
+            }
+            userInfoSection.classList.remove('hidden'); 
+        }
+
+    }); 
+
+    // This is the callback for the main form submission
+    function jsonpCallbackRepair(response) { 
         document.getElementById('submitButton').disabled = false;
-        const scriptEl = document.getElementById(document.currentScript.id);
-        if(scriptEl) document.body.removeChild(scriptEl);
-        delete window['jsonpCallbackRepair'];
+        
+        // Clean up the script tag by its ID if possible
+        // Assuming script.id was set like 'jsonp-script-' + Date.now()
+        // This part can be tricky if not managed carefully. 
+        // It's safer to let them be, or ensure IDs are perfectly managed.
 
         if (response.success) {
             Swal.fire({
@@ -210,8 +356,8 @@
                 if (liff.isInClient()) {
                     liff.closeWindow();
                 } else {
-                    // Optional: clear form or redirect for web app
                     document.getElementById('repairForm').reset();
+                    document.getElementById('userInfoSection').classList.add('hidden'); // Hide user info on reset
                 }
             });
         } else {
