@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบแจ้งซ่อมครุภัณฑ์</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <style>
+        body { font-family: 'Sarabun', sans-serif; background-color: #f5f5f5; }
+        .tab-active { background-color: #2E7D32; color: white; border-bottom: 3px solid #FFC107; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen flex flex-col">
+        <header class="bg-green-800 text-white shadow-md">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <h1 class="text-xl font-bold">ระบบแจ้งซ่อม</h1>
+                <div id="userMenu" class="relative">
+                    <button onclick="document.getElementById('userMenuDropdown').classList.toggle('hidden')" class="flex items-center space-x-2">
+                        <img id="userProfilePic" class="w-8 h-8 rounded-full bg-yellow-400">
+                        <span id="userDisplayName" class="text-sm font-medium">Loading...</span>
+                    </button>
+                    <div id="userMenuDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 hidden">
+                        <a href="#" onclick="liff.logout(); liff.closeWindow();" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">ออกจากระบบ</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-grow container mx-auto px-4 py-6">
+            <div class="flex border-b border-gray-200 mb-6">
+                <button id="repairTab" class="tab-active px-4 py-2 font-medium text-sm rounded-t-lg">แจ้งซ่อม</button>
+                </div>
+
+            <div id="repairContent">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-semibold text-green-800 mb-4">แบบฟอร์มแจ้งซ่อม</h2>
+                    <form id="repairForm">
+                        <input type="hidden" id="userId">
+                        <input type="hidden" id="lineDisplayName">
+
+                        <div class="mb-6 border-t pt-4">
+                            <h3 class="text-md font-medium text-gray-700 mb-3">ข้อมูลผู้แจ้งและอุปกรณ์</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="contactPhone" class="block text-sm font-medium text-gray-700 mb-1">เบอร์โทรภายในสำหรับติดต่อ <span class="text-red-500">*</span></label>
+                                    <input type="text" id="contactPhone" maxlength="4" pattern="\d{4}" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                                </div>
+                                <div>
+                                    <label for="equipmentType" class="block text-sm font-medium text-gray-700 mb-1">ประเภทครุภัณฑ์ <span class="text-red-500">*</span></label>
+                                    <select id="equipmentType" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                                        <option value="" disabled selected>-- เลือกประเภท --</option>
+                                        <option value="คอมพิวเตอร์ตั้งโต๊ะ">คอมพิวเตอร์ตั้งโต๊ะ</option>
+                                        <option value="โน้ตบุ๊ก">โน้ตบุ๊ก</option>
+                                        <option value="เครื่องพิมพ์">เครื่องพิมพ์</option>
+                                        <option value="สแกนเนอร์">สแกนเนอร์</option>
+                                        <option value="โปรเจคเตอร์">โปรเจคเตอร์</option>
+                                        <option value="อุปกรณ์เครือข่าย (Router/Switch)">อุปกรณ์เครือข่าย (Router/Switch)</option>
+                                        <option value="อื่นๆ">อื่นๆ</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">รหัสครุภัณฑ์ (ถ้ามี)</label>
+                                    <input type="text" id="equipmentId" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">ยี่ห้อ/รุ่น</label>
+                                    <input type="text" id="equipmentBrand" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">สถานที่ตั้ง (อาคาร/ห้อง) <span class="text-red-500">*</span></label>
+                                    <input type="text" id="equipmentLocation" class="w-full px-3 py-2 border border-gray-300 rounded-md" required placeholder="เช่น อาคาร 5 ชั้น 2 ห้อง 203">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-6 border-t pt-4">
+                             <h3 class="text-md font-medium text-gray-700 mb-3">รายละเอียดปัญหา</h3>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">กรุณาระบุรายละเอียดปัญหาที่พบ <span class="text-red-500">*</span></label>
+                                <textarea id="problemDetails" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-md" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 border-t pt-4">
+                            <h3 class="text-md font-medium text-gray-700 mb-2">หมายเหตุ และเงื่อนไขการซ่อม</h3>
+                            <div class="space-y-1 text-sm text-gray-600 bg-yellow-50 p-3 rounded-md">
+                                <p>1. เพื่อความปลอดภัยของข้อมูลในเครื่อง กรุณาสำรองข้อมูลก่อนนำเครื่องส่งซ่อม “กรณีข้อมูลสูญหายจะไม่รับผิดชอบ ในทุกกรณี”</p>
+                                <p>2. กรุณาตรวจสอบอุปกรณ์ต่างๆ ก่อนนำเครื่องส่งซ่อม “กรณีสูญหายจะไม่รับผิดชอบ ในทุกกรณี”</p>
+                                <p>3. ติดตั้งเฉพาะโปรแกรมที่ถูกลิขสิทธิ์เท่านั้น</p>
+                            </div>
+                            <label class="mt-3 flex items-center">
+                                <input type="checkbox" id="repairConditionsAccepted" name="repairConditionsAccepted" required class="h-5 w-5 text-green-700 focus:ring-green-500 border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-700">ข้าพเจ้ารับทราบและยอมรับเงื่อนไขการซ่อมดังกล่าว <span class="text-red-500">*</span></span>
+                            </label>
+                        </div>
+
+                        <div class="mt-6 border-t pt-4">
+                             <h3 class="text-md font-medium text-gray-700 mb-2">การยินยอมเกี่ยวกับข้อมูลส่วนบุคคล (PDPA)</h3>
+                            <label class="flex items-center">
+                                <input type="checkbox" id="pdpaConsentRepair" name="pdpaConsentRepair" required class="h-5 w-5 text-green-700 focus:ring-green-500 border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-700">ข้าพเจ้ายินยอมให้มหาวิทยาลัยฯ เก็บรวบรวมและใช้ข้อมูลส่วนบุคคลที่เกี่ยวข้องกับการแจ้งซ่อมนี้ ตามนโยบายคุ้มครองข้อมูลส่วนบุคคล <span class="text-red-500">*</span></span>
+                            </label>
+                        </div>
+                        
+                        <div class="flex justify-center mt-8">
+                            <button type="submit" id="submitButton" class="bg-green-700 hover:bg-green-900 text-white font-medium py-2 px-6 rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed">
+                                ส่งแบบฟอร์มแจ้งซ่อม
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+             <div id="loadingMessage" class="text-center text-gray-500 mt-4 hidden"><p>กำลังโหลด...</p></div>
+        </main>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+        const submitButton = document.getElementById('submitButton');
+        const loadingMessage = document.getElementById('loadingMessage');
+        loadingMessage.classList.remove('hidden');
+        submitButton.disabled = true;
+
+        try {
+            // !!! PASTE YOUR *NEW* LIFF ID FOR REPAIR SYSTEM HERE !!!
+            await liff.init({ liffId: "2007495650-DVW3AjjM" }); 
+            
+            if (!liff.isLoggedIn()) {
+                loadingMessage.textContent = 'กรุณา Login LINE ก่อนใช้งาน';
+                liff.login({ redirectUri: window.location.href }); // Redirect to login
+                return; 
+            }
+            
+            const profile = await liff.getProfile();
+            document.getElementById('userId').value = profile.userId;
+            document.getElementById('lineDisplayName').value = profile.displayName;
+            document.getElementById('userDisplayName').textContent = profile.displayName;
+            document.getElementById('userProfilePic').src = profile.pictureUrl;
+            
+            loadingMessage.classList.add('hidden');
+            submitButton.disabled = false;
+
+        } catch (err) {
+            loadingMessage.innerHTML = '<p class="text-red-500">เกิดข้อผิดพลาดในการโหลดข้อมูล LIFF</p>';
+            Swal.fire({ icon: 'error', title: 'LIFF Error', text: 'ไม่สามารถโหลดข้อมูลผู้ใช้จาก LINE ได้: ' + err.message });
+            console.error("LIFF Init/Profile Error: ", err);
+        }
+
+        document.getElementById('repairForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if(submitButton.disabled) return; // Prevent multiple submissions
+
+            if (!this.checkValidity()) {
+                Swal.fire({ icon: 'error', title: 'ข้อมูลไม่ครบถ้วน', text: 'กรุณากรอกข้อมูลในช่องที่มีเครื่องหมาย * ให้ครบทุกช่อง' });
+                return;
+            }
+            
+            submitButton.disabled = true;
+            Swal.fire({ title: 'กำลังส่งข้อมูล...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+
+            const formData = {
+                userId: document.getElementById('userId').value,
+                lineDisplayName: document.getElementById('lineDisplayName').value,
+                contactPhone: document.getElementById('contactPhone').value,
+                equipmentType: document.getElementById('equipmentType').value,
+                equipmentId: document.getElementById('equipmentId').value || 'N/A',
+                equipmentBrand: document.getElementById('equipmentBrand').value || 'N/A',
+                equipmentLocation: document.getElementById('equipmentLocation').value,
+                problemDetails: document.getElementById('problemDetails').value,
+                repairConditionsAccepted: document.getElementById('repairConditionsAccepted').checked,
+                pdpaConsentRepair: document.getElementById('pdpaConsentRepair').checked
+            };
+
+            // !!! PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE !!!
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbzc5WNqmqUVpubQ0QfFkieiJCx1ZlgWdiDJhHPj9pPpnYI4Uj0rLehc7JCSm7FYbI4v/exec'; 
+            const queryParams = new URLSearchParams({
+                callback: 'jsonpCallbackRepair', // Use a unique callback name
+                action: 'requestRepair', // This action matches code.gs
+                ...formData
+            }).toString();
+
+            const script = document.createElement('script');
+            script.id = 'jsonp-script-' + Date.now();
+            script.src = `${scriptUrl}?${queryParams}`;
+            script.onerror = function() {
+                Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาดในการเชื่อมต่อ', text: 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้ง' });
+                submitButton.disabled = false;
+                delete window['jsonpCallbackRepair'];
+            };
+            document.body.appendChild(script);
+        });
+    });
+
+    function jsonpCallbackRepair(response) { // Ensure this callback name is unique
+        document.getElementById('submitButton').disabled = false;
+        const scriptEl = document.getElementById(document.currentScript.id);
+        if(scriptEl) document.body.removeChild(scriptEl);
+        delete window['jsonpCallbackRepair'];
+
+        if (response.success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'ส่งเรื่องแจ้งซ่อมสำเร็จ!',
+                html: `เลขที่ใบแจ้งซ่อมของคุณคือ: <br><b>${response.ticketId}</b><br>กรุณาใช้เลขนี้ในการติดตามสถานะ`
+            }).then(() => {
+                if (liff.isInClient()) {
+                    liff.closeWindow();
+                } else {
+                    // Optional: clear form or redirect for web app
+                    document.getElementById('repairForm').reset();
+                }
+            });
+        } else {
+            Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาด', text: response.message || 'ไม่สามารถบันทึกข้อมูลได้' });
+        }
+    }
+    </script>
+</body>
+</html>
