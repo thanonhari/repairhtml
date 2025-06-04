@@ -11,6 +11,12 @@
         body { font-family: 'Sarabun', sans-serif; background-color: #f5f5f5; }
         .tab-active { background-color: #2E7D32; color: white; border-bottom: 3px solid #FFC107; }
         .hidden { display: none; }
+        /* เพิ่มสไตล์สำหรับ readonly input ให้ดูเหมือน text ปกติ แต่คลิกไม่ได้ */
+        input[readonly].bg-gray-100 {
+            background-color: #f9fafb; /* สีพื้นหลังอ่อนๆ */
+            cursor: default;
+            border-color: #d1d5db; /* สีขอบเทาอ่อน */
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -40,16 +46,33 @@
                     <h2 class="text-xl font-semibold text-green-800 mb-4">แบบฟอร์มแจ้งซ่อม</h2>
                     <form id="repairForm">
                         <input type="hidden" id="userId">
-                        <input type="hidden" id="lineDisplayNameFromProfile"> <div id="userInfoSection" class="mb-6 pb-4 border-b hidden">
-                            <h3 class="text-md font-medium text-gray-700 mb-2">ข้อมูลผู้แจ้ง (จากระบบลงทะเบียน)</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 text-sm">
-                                <p><strong>ชื่อ-นามสกุล:</strong> <span id="displayFullName"></span></p>
-                                <p><strong>ตำแหน่ง:</strong> <span id="displayPosition"></span></p>
-                                <p><strong>หน่วยงาน/คณะ:</strong> <span id="displayDepartment"></span></p>
+                        <input type="hidden" id="lineDisplayNameFromProfile">
+
+                        <div id="userInfoSection" class="mb-6 pb-4 border-b hidden">
+                            <h3 class="text-md font-medium text-gray-700 mb-3 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                </svg>
+                                ข้อมูลผู้แจ้ง (จากระบบลงทะเบียน)
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">ชื่อ-นามสกุล</label>
+                                    <input type="text" id="displayFullNameInput" class="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 focus:outline-none" readonly>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">ตำแหน่ง</label>
+                                    <input type="text" id="displayPositionInput" class="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 focus:outline-none" readonly>
+                                </div>
                             </div>
                         </div>
                         <div class="mb-6 border-t pt-4">
-                             <h3 class="text-md font-medium text-gray-700 mb-3">ข้อมูลครุภัณฑ์และปัญหา</h3>
+                             <h3 class="text-md font-medium text-gray-700 mb-3 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M3 5a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V5zM3 13a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM16 17a1 1 0 01-1-1v-2a1 1 0 112 0v2a1 1 0 01-1 1zM11 17a1 1 0 01-1-1v-6a1 1 0 112 0v6a1 1 0 01-1 1zM6 17a1 1 0 01-1-1v-2a1 1 0 112 0v2a1 1 0 01-1 1z"/>
+                                </svg>
+                                ข้อมูลครุภัณฑ์และปัญหา
+                            </h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label for="contactPhone" class="block text-sm font-medium text-gray-700 mb-1">เบอร์โทรภายในสำหรับติดต่อ <span class="text-red-500">*</span></label>
@@ -140,7 +163,12 @@
                         </div>
 
                         <div class="mb-6 border-t pt-4">
-                             <h3 class="text-md font-medium text-gray-700 mb-3">รายละเอียดปัญหา</h3>
+                             <h3 class="text-md font-medium text-gray-700 mb-3 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                </svg>
+                                รายละเอียดปัญหา
+                            </h3>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">กรุณาระบุรายละเอียดปัญหาที่พบ <span class="text-red-500">*</span></label>
                                 <textarea id="problemDetails" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-md" required></textarea>
@@ -148,7 +176,12 @@
                         </div>
 
                         <div class="mt-6 border-t pt-4">
-                            <h3 class="text-md font-medium text-gray-700 mb-2">หมายเหตุ และเงื่อนไขการซ่อม</h3>
+                            <h3 class="text-md font-medium text-gray-700 mb-2 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.588-3.751z" />
+                                </svg>
+                                หมายเหตุ และเงื่อนไขการซ่อม
+                            </h3>
                             <div class="space-y-1 text-sm text-gray-600 bg-yellow-50 p-3 rounded-md">
                                 <p>1. เพื่อความปลอดภัยของข้อมูลในเครื่อง กรุณาสำรองข้อมูลก่อนนำเครื่องส่งซ่อม “กรณีข้อมูลสูญหายจะไม่รับผิดชอบ ในทุกกรณี”</p>
                                 <p>2. กรุณาตรวจสอบอุปกรณ์ต่างๆ ก่อนนำเครื่องส่งซ่อม “กรณีสูญหายจะไม่รับผิดชอบ ในทุกกรณี”</p>
@@ -161,7 +194,13 @@
                         </div>
 
                         <div class="mt-6 border-t pt-4">
-                             <h3 class="text-md font-medium text-gray-700 mb-2">การยินยอมเกี่ยวกับข้อมูลส่วนบุคคล (PDPA)</h3>
+                             <h3 class="text-md font-medium text-gray-700 mb-2 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.022 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                                </svg>
+                                การยินยอมเกี่ยวกับข้อมูลส่วนบุคคล (PDPA)
+                            </h3>
                             <label class="flex items-center">
                                 <input type="checkbox" id="pdpaConsentRepair" name="pdpaConsentRepair" required class="h-5 w-5 text-green-700 focus:ring-green-500 border-gray-300 rounded">
                                 <span class="ml-2 text-sm text-gray-700">ข้าพเจ้ายินยอมให้มหาวิทยาลัยฯ เก็บรวบรวมและใช้ข้อมูลส่วนบุคคลเพื่อดำเนินการแจ้งซ่อม <span class="text-red-500">*</span></span>
@@ -185,10 +224,12 @@
         const submitButton = document.getElementById('submitButton');
         const loadingMessage = document.getElementById('loadingMessage');
         const userInfoSection = document.getElementById('userInfoSection');
-        const displayFullName = document.getElementById('displayFullName');
-        const displayPosition = document.getElementById('displayPosition');
-        const displayDepartment = document.getElementById('displayDepartment');
-        // const displayUserLocation = document.getElementById('displayUserLocation'); // If you want to display it
+        
+        // Elements for displaying user data from registration
+        const displayFullNameInput = document.getElementById('displayFullNameInput');
+        const displayPositionInput = document.getElementById('displayPositionInput');
+        const equipmentLocationInput = document.getElementById('equipmentLocation');
+
 
         loadingMessage.classList.remove('hidden');
         submitButton.disabled = true;
@@ -205,20 +246,17 @@
             
             const profile = await liff.getProfile();
             document.getElementById('userId').value = profile.userId;
-            document.getElementById('lineDisplayNameFromProfile').value = profile.displayName; // Store LINE Display Name
-            document.getElementById('userDisplayName').textContent = profile.displayName; // Show LINE Display Name in header
+            document.getElementById('lineDisplayNameFromProfile').value = profile.displayName; 
+            document.getElementById('userDisplayName').textContent = profile.displayName; 
             document.getElementById('userProfilePic').src = profile.pictureUrl;
             
-            fetchUserDetails(profile.userId); // Fetch details after getting LIFF profile
+            fetchUserDetails(profile.userId);
 
         } catch (err) {
             loadingMessage.innerHTML = '<p class="text-red-500">เกิดข้อผิดพลาดในการโหลดข้อมูล LIFF</p>';
             Swal.fire({ icon: 'error', title: 'LIFF Error', text: 'ไม่สามารถโหลดข้อมูลผู้ใช้จาก LINE ได้: ' + err.message });
             console.error("LIFF Init/Profile Error: ", err);
-            // Even if LIFF profile fails, we might proceed without pre-filled data if needed,
-            // but fetching user details relies on userId from profile.
-            // For now, keep button disabled if profile fails, or if fetchUserDetails fails.
-            loadingMessage.classList.add('hidden'); // Hide loading
+            loadingMessage.classList.add('hidden'); 
         }
 
         document.getElementById('repairForm').addEventListener('submit', function(e) {
@@ -235,14 +273,14 @@
 
             const formData = {
                 userId: document.getElementById('userId').value,
-                lineDisplayName: document.getElementById('lineDisplayNameFromProfile').value, // Send LINE Display Name
-                // FullName from Data_LIFF (shown in displayFullName) is not directly sent unless you add a hidden field for it
-                // The form assumes contactPhone might be different from the registered phone.
+                lineDisplayName: document.getElementById('lineDisplayNameFromProfile').value,
+                // FullName from Data_LIFF is in displayFullNameInput.value (but it's readonly)
+                // We'll send contactPhone which might be pre-filled or user-edited
                 contactPhone: document.getElementById('contactPhone').value,
                 equipmentType: document.getElementById('equipmentType').value,
                 equipmentId: document.getElementById('equipmentId').value || 'N/A',
                 equipmentBrand: document.getElementById('equipmentBrand').value || 'N/A',
-                equipmentLocation: document.getElementById('equipmentLocation').value,
+                equipmentLocation: document.getElementById('equipmentLocation').value, // User might have edited this
                 problemDetails: document.getElementById('problemDetails').value,
                 repairConditionsAccepted: document.getElementById('repairConditionsAccepted').checked,
                 pdpaConsentRepair: document.getElementById('pdpaConsentRepair').checked
@@ -251,13 +289,13 @@
             // !!! PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE !!!
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbzc5WNqmqUVpubQ0QfFkieiJCx1ZlgWdiDJhHPj9pPpnYI4Uj0rLehc7JCSm7FYbI4v/exec'; 
             const queryParams = new URLSearchParams({
-                callback: 'jsonpCallbackRepair',
-                action: 'requestRepair',
+                callback: 'jsonpCallbackRepair', 
+                action: 'requestRepair', 
                 ...formData
             }).toString();
 
             const script = document.createElement('script');
-            script.id = 'jsonp-script-' + Date.now(); // Unique ID for script tag
+            script.id = 'jsonp-script-repair-' + Date.now(); 
             script.src = `${scriptUrl}?${queryParams}`;
             script.onerror = function() {
                 Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาดในการเชื่อมต่อ', text: 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้ง' });
@@ -271,7 +309,7 @@
             loadingMessage.textContent = 'กำลังดึงข้อมูลผู้ลงทะเบียน...';
             // !!! PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE !!!
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbzc5WNqmqUVpubQ0QfFkieiJCx1ZlgWdiDJhHPj9pPpnYI4Uj0rLehc7JCSm7FYbI4v/exec'; 
-            const callbackName = 'jsonpCallbackUserDetails_' + Date.now(); // Unique callback name
+            const callbackName = 'jsonpCallbackUserDetails_' + Date.now(); 
 
             window[callbackName] = function(response) {
                 const scriptElUser = document.getElementById('jsonp-script-userdetails-' + callbackName);
@@ -306,7 +344,7 @@
             }).toString();
 
             const script = document.createElement('script');
-            script.id = 'jsonp-script-userdetails-' + callbackName; // Unique ID
+            script.id = 'jsonp-script-userdetails-' + callbackName; 
             script.src = `${scriptUrl}?${queryParams}`;
             script.onerror = function() {
                 Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาด', text: 'ไม่สามารถดึงข้อมูลผู้ลงทะเบียนได้' });
@@ -319,17 +357,18 @@
 
         function populateFormWithUserData(userData) {
             if (userData.fullName) {
-                displayFullName.textContent = userData.fullName;
+                displayFullNameInput.value = userData.fullName;
             }
             if (userData.position) {
-                displayPosition.textContent = userData.position;
+                displayPositionInput.value = userData.position;
             }
             if (userData.department) {
-                displayDepartment.textContent = userData.department;
+                // Pre-fill placeholder of equipmentLocation, user can edit or add room details
+                equipmentLocationInput.placeholder = userData.department + " (กรุณาระบุห้อง/ชั้น เพิ่มเติม)";
+                // If the actual location from Data_LIFF is more detailed, you might want to set its value directly
+                // For example, if userData.location is like "คณะวิทยาศาสตร์ ตึก 5 ห้อง 501"
+                // equipmentLocationInput.value = userData.location; 
             }
-            // if (userData.location) { // Location from original registration
-            //    displayUserLocation.textContent = userData.location;
-            // }
             if (userData.phone) {
                 document.getElementById('contactPhone').value = userData.phone;
             }
@@ -338,14 +377,12 @@
 
     }); 
 
-    // This is the callback for the main form submission
     function jsonpCallbackRepair(response) { 
         document.getElementById('submitButton').disabled = false;
-        
-        // Clean up the script tag by its ID if possible
-        // Assuming script.id was set like 'jsonp-script-' + Date.now()
-        // This part can be tricky if not managed carefully. 
-        // It's safer to let them be, or ensure IDs are perfectly managed.
+        // Minimal script tag cleanup - more robust cleanup would involve passing the script.id
+        const scriptTags = document.querySelectorAll('script[id^="jsonp-script-repair-"]');
+        scriptTags.forEach(tag => tag.remove());
+        delete window['jsonpCallbackRepair']; // Assuming only one callback of this name at a time
 
         if (response.success) {
             Swal.fire({
@@ -357,7 +394,7 @@
                     liff.closeWindow();
                 } else {
                     document.getElementById('repairForm').reset();
-                    document.getElementById('userInfoSection').classList.add('hidden'); // Hide user info on reset
+                    userInfoSection.classList.add('hidden'); 
                 }
             });
         } else {
