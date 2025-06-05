@@ -30,7 +30,7 @@
                         <span id="userDisplayName" class="text-sm font-medium">Loading...</span>
                     </button>
                     <div id="userMenuDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 hidden">
-                        <a href="#" onclick="liff.logout(); liff.closeWindow();" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">ออกจากระบบ</a>
+                        <a href="#" onclick="if(liff.isLoggedIn()) { liff.logout(); } liff.closeWindow();" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">ออกจากระบบ</a>
                     </div>
                 </div>
             </div>
@@ -47,11 +47,13 @@
                     <form id="repairForm">
                         <input type="hidden" id="userId">
                         <input type="hidden" id="lineDisplayNameFromProfile">
-                        <input type="hidden" id="registeredFullName"> <input type="hidden" id="registeredPosition"> <input type="hidden" id="registeredDepartment"> <div id="userInfoSection" class="mb-6 pb-4 border-b hidden">
+                        <input type="hidden" id="registeredFullName"> 
+                        <input type="hidden" id="registeredPosition">
+                        <input type="hidden" id="registeredDepartment">
+
+                        <div id="userInfoSection" class="mb-6 pb-4 border-b hidden">
                             <h3 class="text-md font-medium text-gray-700 mb-3 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg>
                                 ข้อมูลผู้แจ้ง (จากระบบลงทะเบียน)
                             </h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
@@ -65,11 +67,10 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="mb-6 border-t pt-4">
                              <h3 class="text-md font-medium text-gray-700 mb-3 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M3 5a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V5zM3 13a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM16 17a1 1 0 01-1-1v-2a1 1 0 112 0v2a1 1 0 01-1 1zM11 17a1 1 0 01-1-1v-6a1 1 0 112 0v6a1 1 0 01-1 1zM6 17a1 1 0 01-1-1v-2a1 1 0 112 0v2a1 1 0 01-1 1z"/>
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor"><path d="M3 5a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V5zM3 13a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM16 17a1 1 0 01-1-1v-2a1 1 0 112 0v2a1 1 0 01-1 1zM11 17a1 1 0 01-1-1v-6a1 1 0 112 0v6a1 1 0 01-1 1zM6 17a1 1 0 01-1-1v-2a1 1 0 112 0v2a1 1 0 01-1 1z"/></svg>
                                 ข้อมูลครุภัณฑ์และปัญหา
                             </h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -81,7 +82,7 @@
                                     <label for="equipmentType" class="block text-sm font-medium text-gray-700 mb-1">ชื่อครุภัณฑ์/ประเภท <span class="text-red-500">*</span></label>
                                     <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md" id="equipmentType" name="equipmentType" list="equipmentList" required placeholder="พิมพ์เพื่อค้นหาหรือเลือก">
                                     <datalist id="equipmentList">
-                                        <option value="HP Computer"></option>
+                                       <option value="HP Computer"></option>
                                         <option value="HP All-In-One Computer"></option>
                                         <option value="Dell Computer"></option>
                                         <option value="Dell All-In-One Computer"></option>
@@ -143,7 +144,8 @@
                                         <option value="โปรเจคเตอร์"></option>
                                         <option value="อุปกรณ์เครือข่าย (Router/Switch)"></option>
                                         <option value="กล้องวงจรปิด"></option>
-                                        <option value="อื่นๆ (ระบุในรายละเอียด)"></option>
+                                        <option value="อื่นๆ (ระบุในรายละเอียด)"></option> 
+                                        
                                     </datalist>
                                 </div>
                                 <div>
@@ -155,7 +157,7 @@
                                     <input type="text" id="equipmentBrand" class="w-full px-3 py-2 border border-gray-300 rounded-md">
                                 </div>
                                 <div class="md:col-span-2">
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">สถานที่ตั้ง (อาคาร/ห้อง) <span class="text-red-500">*</span></label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">สถานที่ตั้งอุปกรณ์ (อาคาร/ห้อง) <span class="text-red-500">*</span></label>
                                     <input type="text" id="equipmentLocation" class="w-full px-3 py-2 border border-gray-300 rounded-md" required placeholder="กรุณาระบุ หรือจะดึงจากข้อมูลลงทะเบียน">
                                 </div>
                             </div>
@@ -163,9 +165,7 @@
 
                         <div class="mb-6 border-t pt-4">
                              <h3 class="text-md font-medium text-gray-700 mb-3 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
                                 รายละเอียดปัญหา
                             </h3>
                             <div>
@@ -177,7 +177,7 @@
                         <div class="mb-6 border-t pt-4">
                             <h3 class="text-md font-medium text-gray-700 mb-3 flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                                แนบรูปภาพ (ถ้ามี)
+                                แนบรูปภาพ (ถ้ามี - สูงสุด 1 รูป)
                             </h3>
                             <div>
                                 <input type="file" id="imageUpload" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100">
@@ -185,12 +185,9 @@
                             </div>
                         </div>
 
-
                         <div class="mt-6 border-t pt-4">
                             <h3 class="text-md font-medium text-gray-700 mb-2 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.588-3.751z" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.588-3.751z" /></svg>
                                 หมายเหตุ และเงื่อนไขการซ่อม
                             </h3>
                             <div class="space-y-1 text-sm text-gray-600 bg-yellow-50 p-3 rounded-md">
@@ -206,10 +203,7 @@
 
                         <div class="mt-6 border-t pt-4">
                              <h3 class="text-md font-medium text-gray-700 mb-2 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.022 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z" /><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.022 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" /></svg>
                                 การยินยอมเกี่ยวกับข้อมูลส่วนบุคคล (PDPA)
                             </h3>
                             <label class="flex items-center">
@@ -228,15 +222,15 @@
             </div>
             <div id="loadingMessage" class="text-center text-gray-500 mt-4 hidden"><p>กำลังโหลด...</p></div>
         </main>
-         <footer class="bg-gray-100 border-t border-gray-200 py-4 mt-auto">
+        <footer class="bg-gray-100 border-t border-gray-200 py-4 mt-auto">
             <div class="container mx-auto px-4 text-center text-sm text-gray-600">
-                <p id="footerText">© 2024 ระบบแจ้งซ่อมครุภัณฑ์คอมพิวเตอร์ | ศูนย์เทคโนโลยีสารสนเทศ</p>
+                <p id="footerText">© 2025 ระบบแจ้งซ่อมครุภัณฑ์คอมพิวเตอร์ | ศูนย์เทคโนโลยีสารสนเทศ</p>
             </div>
         </footer>
     </div>
 
     <script>
-    let imageDataBase64 = ""; // Store base64 image data
+    let imageDataBase64 = ""; 
     let imageFileName = "";
     let imageMimeType = "";
 
@@ -253,25 +247,30 @@
         loadingMessage.classList.remove('hidden');
         submitButton.disabled = true;
 
-        // Image Upload Preview
         imageUpload.addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
+                if (!file.type.match('image.*')) {
+                    Swal.fire({icon:'error', title:'ไฟล์ไม่ถูกต้อง', text:'กรุณาเลือกไฟล์รูปภาพเท่านั้น'});
+                    this.value = null; 
+                    imagePreview.classList.add('hidden');
+                    imagePreview.src = "#";
+                    imageDataBase64 = ""; imageFileName = ""; imageMimeType = "";
+                    return;
+                }
                 imageFileName = file.name;
                 imageMimeType = file.type;
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     imagePreview.src = e.target.result;
-                    imageDataBase64 = e.target.result; // Full base64 string with prefix
+                    imageDataBase64 = e.target.result.split(',')[1]; // Get only base64 data
                     imagePreview.classList.remove('hidden');
                 }
                 reader.readAsDataURL(file);
             } else {
                 imagePreview.classList.add('hidden');
                 imagePreview.src = "#";
-                imageDataBase64 = "";
-                imageFileName = "";
-                imageMimeType = "";
+                imageDataBase64 = ""; imageFileName = ""; imageMimeType = "";
             }
         });
 
@@ -293,7 +292,7 @@
             fetchUserDetails(profile.userId);
 
         } catch (err) {
-            loadingMessage.innerHTML = '<p class="text-red-500">เกิดข้อผิดพลาดในการโหลดข้อมูล LIFF</p>';
+            loadingMessage.innerHTML = '<p class="text-red-500">เกิดข้อผิดพลาดในการโหลดข้อมูล LIFF: ' + err.message + '</p>';
             Swal.fire({ icon: 'error', title: 'LIFF Error', text: 'ไม่สามารถโหลดข้อมูลผู้ใช้จาก LINE ได้: ' + err.message });
             console.error("LIFF Init/Profile Error: ", err);
             loadingMessage.classList.add('hidden'); 
@@ -309,78 +308,73 @@
             }
             
             submitButton.disabled = true;
-            Swal.fire({ title: 'กำลังส่งข้อมูล...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+            Swal.fire({ title: 'กำลังส่งข้อมูล...', text: 'กรุณารอสักครู่ ระบบกำลังบันทึกและอัปโหลดรูปภาพ (ถ้ามี)', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
 
-            const formData = {
-                userId: document.getElementById('userId').value,
-                lineDisplayName: document.getElementById('lineDisplayNameFromProfile').value,
-                registeredFullName: document.getElementById('registeredFullName').value, // Send registered name
-                registeredPosition: document.getElementById('registeredPosition').value, // Send registered position
-                registeredDepartment: document.getElementById('registeredDepartment').value, // Send registered department
-                contactPhone: document.getElementById('contactPhone').value,
-                equipmentType: document.getElementById('equipmentType').value,
-                equipmentId: document.getElementById('equipmentId').value || 'N/A',
-                equipmentBrand: document.getElementById('equipmentBrand').value || 'N/A',
-                equipmentLocation: document.getElementById('equipmentLocation').value,
-                problemDetails: document.getElementById('problemDetails').value,
-                repairConditionsAccepted: document.getElementById('repairConditionsAccepted').checked,
-                pdpaConsentRepair: document.getElementById('pdpaConsentRepair').checked,
-                // Image data
-                imageData: imageDataBase64, // Send the full base64 string
-                imageFileName: imageFileName,
-                imageMimeType: imageMimeType
-            };
+            const params = new URLSearchParams();
+            params.append('action', 'requestRepair');
+            params.append('userId', document.getElementById('userId').value);
+            params.append('lineDisplayName', document.getElementById('lineDisplayNameFromProfile').value);
+            params.append('registeredFullName', document.getElementById('registeredFullName').value);
+            params.append('registeredPosition', document.getElementById('registeredPosition').value);
+            params.append('registeredDepartment', document.getElementById('registeredDepartment').value);
+            params.append('contactPhone', document.getElementById('contactPhone').value);
+            params.append('equipmentType', document.getElementById('equipmentType').value);
+            params.append('equipmentId', document.getElementById('equipmentId').value || 'N/A');
+            params.append('equipmentBrand', document.getElementById('equipmentBrand').value || 'N/A');
+            params.append('equipmentLocation', document.getElementById('equipmentLocation').value);
+            params.append('problemDetails', document.getElementById('problemDetails').value);
+            params.append('repairConditionsAccepted', document.getElementById('repairConditionsAccepted').checked.toString());
+            params.append('pdpaConsentRepair', document.getElementById('pdpaConsentRepair').checked.toString());
+
+            if (imageDataBase64) {
+                params.append('imageData', imageDataBase64);
+                params.append('imageFileName', imageFileName);
+                params.append('imageMimeType', imageMimeType);
+            }
             
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbzc5WNqmqUVpubQ0QfFkieiJCx1ZlgWdiDJhHPj9pPpnYI4Uj0rLehc7JCSm7FYbI4v/exec'; 
-            const queryParams = new URLSearchParams({
-                callback: 'jsonpCallbackRepair', 
-                action: 'requestRepair', 
-                // Spread operator might hit URL length limits with base64 image
-                // Send each parameter explicitly
-                userId: formData.userId,
-                lineDisplayName: formData.lineDisplayName,
-                registeredFullName: formData.registeredFullName,
-                registeredPosition: formData.registeredPosition,
-                registeredDepartment: formData.registeredDepartment,
-                contactPhone: formData.contactPhone,
-                equipmentType: formData.equipmentType,
-                equipmentId: formData.equipmentId,
-                equipmentBrand: formData.equipmentBrand,
-                equipmentLocation: formData.equipmentLocation,
-                problemDetails: formData.problemDetails,
-                repairConditionsAccepted: formData.repairConditionsAccepted,
-                pdpaConsentRepair: formData.pdpaConsentRepair,
-                imageFileName: formData.imageFileName,
-                imageMimeType: formData.imageMimeType
-                // imageData is too long for GET, will be sent in POST body if we switch from JSONP
-            }).toString();
 
-            // For image data, JSONP (GET) is not suitable due to URL length limits.
-            // We need to use a POST request. google.script.run is not available if HTML is not served by GAS.
-            // A common workaround is to send metadata via GET and then use a separate mechanism or endpoint for file upload,
-            // OR, if the image is small enough, send only the base64 data string.
-            // For now, let's send image metadata and the base64 data. If it's too long, GAS will truncate it.
-            // This is a limitation of JSONP for large data.
-            
-            let fullScriptSrc = `${scriptUrl}?${queryParams}`;
-            if (formData.imageData) {
-                 // We need to be careful with URL length. Let's try appending it.
-                 // This is NOT ideal for large images. A POST request would be better.
-                 // Consider sending a flag and having user upload to a GAS form if too large.
-                 // For now, trying to send it directly.
-                 fullScriptSrc += `&imageData=${encodeURIComponent(formData.imageData)}`;
-            }
-
-
-            const script = document.createElement('script');
-            script.id = 'jsonp-script-repair-' + Date.now(); 
-            script.src = fullScriptSrc;
-            script.onerror = function() {
-                Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาดในการเชื่อมต่อ', text: 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้ง' });
+            fetch(scriptUrl, {
+                method: 'POST',
+                body: params 
+            })
+            .then(response => {
+                if (!response.ok) {
+                    // Try to get text error for non-JSON responses or network errors
+                    return response.text().then(text => {
+                        throw new Error('Network response was not ok. Status: ' + response.status + '. Body: ' + text);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
                 submitButton.disabled = false;
-                if(window['jsonpCallbackRepair']) delete window['jsonpCallbackRepair'];
-            };
-            document.body.appendChild(script);
+                if (data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'ส่งเรื่องแจ้งซ่อมสำเร็จ!',
+                        html: `เลขที่ใบแจ้งซ่อมของคุณคือ: <br><b>${data.ticketId}</b><br>กรุณาใช้เลขนี้ในการติดตามสถานะ` +
+                              (data.imageUrl && data.imageUrl.startsWith("http") ? `<br><br><a href="${data.imageUrl}" target="_blank" class="text-blue-600 hover:underline">ดูรูปภาพที่แนบ</a>` : '')
+                    }).then(() => {
+                        if (liff.isInClient()) {
+                            liff.closeWindow();
+                        } else {
+                            document.getElementById('repairForm').reset();
+                            document.getElementById('imagePreview').classList.add('hidden');
+                            document.getElementById('imagePreview').src = "#";
+                            imageDataBase64 = ""; imageFileName = ""; imageMimeType = "";
+                            userInfoSection.classList.add('hidden'); 
+                        }
+                    });
+                } else {
+                    Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาดจาก Server', text: data.error || 'ไม่สามารถบันทึกข้อมูลได้' });
+                }
+            })
+            .catch(error => {
+                submitButton.disabled = false;
+                Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาดในการเชื่อมต่อ', text: 'ไม่สามารถส่งข้อมูลได้: ' + error.message });
+                console.error('Fetch Error:', error);
+            });
         });
 
         function fetchUserDetails(userId) {
@@ -432,50 +426,27 @@
         function populateFormWithUserData(userData) {
             if (userData.fullName) {
                 displayFullNameInput.value = userData.fullName;
-                document.getElementById('registeredFullName').value = userData.fullName; // Store for submission
+                document.getElementById('registeredFullName').value = userData.fullName;
             }
             if (userData.position) {
                 displayPositionInput.value = userData.position;
-                document.getElementById('registeredPosition').value = userData.position; // Store for submission
+                document.getElementById('registeredPosition').value = userData.position;
             }
-            if (userData.department) {
+            if (userData.department) { // This is the registered department
                 equipmentLocationInput.placeholder = userData.department + " (กรุณาระบุห้อง/ชั้น เพิ่มเติม)";
-                document.getElementById('registeredDepartment').value = userData.department; // Store for submission
+                document.getElementById('registeredDepartment').value = userData.department;
+                // If the actual registered location is different or more specific
+                // and you want to use it as the default value for equipmentLocation:
+                // if (userData.location) {
+                //    equipmentLocationInput.value = userData.location;
+                // }
             }
             if (userData.phone) {
                 document.getElementById('contactPhone').value = userData.phone;
             }
             userInfoSection.classList.remove('hidden'); 
         }
-
     }); 
-
-    function jsonpCallbackRepair(response) { 
-        document.getElementById('submitButton').disabled = false;
-        const scriptTags = document.querySelectorAll('script[id^="jsonp-script-repair-"]');
-        scriptTags.forEach(tag => tag.remove());
-        delete window['jsonpCallbackRepair']; 
-
-        if (response.success) {
-            Swal.fire({
-                icon: 'success',
-                title: 'ส่งเรื่องแจ้งซ่อมสำเร็จ!',
-                html: `เลขที่ใบแจ้งซ่อมของคุณคือ: <br><b>${response.ticketId}</b><br>กรุณาใช้เลขนี้ในการติดตามสถานะ`
-            }).then(() => {
-                if (liff.isInClient()) {
-                    liff.closeWindow();
-                } else {
-                    document.getElementById('repairForm').reset();
-                    document.getElementById('imagePreview').classList.add('hidden');
-                    document.getElementById('imagePreview').src = "#";
-                    imageDataBase64 = ""; imageFileName = ""; imageMimeType = "";
-                    userInfoSection.classList.add('hidden'); 
-                }
-            });
-        } else {
-            Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาด', text: response.message || 'ไม่สามารถบันทึกข้อมูลได้' });
-        }
-    }
     </script>
 </body>
 </html>
