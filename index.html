@@ -65,126 +65,42 @@
                         </div>
 
                         <div class="mb-6 border-t pt-4">
-                             <h3 class="text-md font-medium text-gray-700 mb-3 flex items-center">
+                            <h3 class="text-md font-medium text-gray-700 mb-3 flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor"><path d="M3 5a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V5zM3 13a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM16 17a1 1 0 01-1-1v-2a1 1 0 112 0v2a1 1 0 01-1 1zM11 17a1 1 0 01-1-1v-6a1 1 0 112 0v6a1 1 0 01-1 1zM6 17a1 1 0 01-1-1v-2a1 1 0 112 0v2a1 1 0 01-1 1z"/></svg>
                                 ข้อมูลครุภัณฑ์และปัญหา
                             </h3>
-                            <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
+
+                            <div class="grid grid-cols-1 gap-4">
+                                <div class="w-full">
                                     <label for="contactPhone" class="block text-sm font-medium text-gray-700 mb-1">เบอร์โทรภายในสำหรับติดต่อ <span class="text-red-500">*</span></label>
                                     <input type="text" id="contactPhone" maxlength="4" pattern="\d{4}" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
                                 </div>
                                 <div>
-                                    <label for="equipmentType" class="block text-sm font-medium text-gray-700 mb-1">ชื่อครุภัณฑ์/ประเภท <span class="text-red-500">*</span></label>
-                                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md" id="equipmentType" name="equipmentType" list="equipmentList" required placeholder="พิมพ์เพื่อค้นหาหรือเลือก">
-                                    <datalist id="equipmentList">
-                                        <datalist id="equipmentList">
-                                        <option value="HP Computer"></option>
-                                        <option value="HP All-In-One Computer"></option>
-                                        <option value="Dell Computer"></option>
-                                        <option value="Dell All-In-One Computer"></option>
-                                        <option value="Lenovo All-In-One Computer"></option>
-                                        <option value="Lenovo Computer"></option>
-                                        <option value="Asus Computer"></option>
-                                        <option value="Asus All-In-One Computer"></option>
-                                        <option value="Acer Computer"></option>
-                                        <option value="Acer All-In-One Computer"></option>
-                                        <option value="Computer"></option>
-                                        <option value="Computer All-In-One"></option>
-                                        <option value="HP Printer"></option>
-                                        <option value="HP All-In-One Printer"></option>
-                                        <option value="Canon Printer"></option>
-                                        <option value="Canon All-In-One Printer"></option>
-                                        <option value="Epson Printer"></option>
-                                        <option value="Epson All-In-One Printer"></option>
-                                        <option value="Brother Printer"></option>
-                                        <option value="Brother All-In-One Printer"></option>
-                                        <option value="Xerox Printer"></option>
-                                        <option value="Fuji Xerox Printer"></option>
-                                        <option value="Fujifilm Printer"></option>
-                                        <option value="Xerox All-In-One Printer"></option>
-                                        <option value="Printer"></option>
-                                        <option value="Printer All-In-One"></option>
-                                        <option value="Printer Fujifilm"></option>
-                                        <option value="HP Notebook"></option>
-                                        <option value="Dell Notebook"></option>
-                                        <option value="Lenovo Notebook"></option>
-                                        <option value="Asus Notebook"></option>
-                                        <option value="Acer Notebook"></option>
-                                        <option value="Notebook"></option>
-                                        <option value="Samsung Monitor"></option>
-                                        <option value="LG Monitor"></option>
-                                        <option value="Dell Monitor"></option>
-                                        <option value="BenQ Monitor"></option>
-                                        <option value="Asus Monitor"></option>
-                                        <option value="Monitor"></option>
-                                        <option value="HP Scanner"></option>
-                                        <option value="Canon Scanner"></option>
-                                        <option value="Epson Scanner"></option>
-                                        <option value="Brother Scanner"></option>
-                                        <option value="Xerox Scanner"></option>
-                                        <option value="Scanner"></option>
-                                        <option value="เครื่องสำรองไฟ"></option>
-                                        <option value="UPS"></option>
-                                        <option value="โทรศัพท์ VOIP"></option>
-                                        <option value="โทรศัพท์ IP Phone"></option>
-                                        <option value="โทรศัพท์ตั้งโต๊ะ"></option>
-                                        <option value="Sharp เครื่องถ่ายเอกสาร"></option>
-                                        <option value="Canon เครื่องถ่ายเอกสาร"></option>
-                                        <option value="Fuji Xerox เครื่องถ่ายเอกสาร"></option>
-                                        <option value="เครื่องถ่ายเอกสารระบบเครือข่าย"></option>
-                                        <option value="สาย LAN"></option>
-                                        <option value="สายโทรศัพท์"></option>
-                                        <option value="สายเครื่องพิมพ์"></option>
-                                        <option value="สาย HDMI"></option>
-                                        <option value="สาย VGA"></option>
-                                        <option value="โปรเจคเตอร์"></option>
-                                        <option value="อุปกรณ์เครือข่าย (Router/Switch)"></option>
-                                        <option value="กล้องวงจรปิด"></option>
-                                        <option value="อื่นๆ (ระบุในรายละเอียด)"></option>
-                                    </datalist>
-                                        
-                                        <option value="อื่นๆ (ระบุในรายละเอียด)"></option>
-                                    </datalist>
-                                </div> -->
-                                <!-- <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">รหัสครุภัณฑ์ (ถ้ามี)</label>
-                                    <input type="text" id="equipmentId" class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                                </div> -->
-                                <!-- <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">ยี่ห้อ/รุ่น</label>
-                                    <input type="text" id="equipmentBrand" class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                                </div> -->
-
-<div class="grid grid-cols-1 gap-4">
-    <div>
-        <label for="inventorySelect" class="block text-sm font-medium text-gray-700 mb-1">เลือกครุภัณฑ์ที่ต้องการแจ้งซ่อม <span class="text-red-500">*</span></label>
-        <select id="inventorySelect" name="inventorySelect" class="w-full px-3 py-2 border border-gray-300 rounded-md" required disabled>
-            <option value="">กำลังโหลดรายการครุภัณฑ์...</option>
-        </select>
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2 bg-gray-50 p-3 rounded-md">
-        <div>
-            <label class="block text-sm font-medium text-gray-500">ประเภท</p>
-            <input type="text" id="displayAssetType" class="w-full mt-1 px-3 py-2 border-gray-200 rounded-md bg-gray-100" readonly>
-        </div>
-        <div>
-            <label class="block text-sm font-medium text-gray-500">ยี่ห้อ/รุ่น</p>
-            <input type="text" id="displayAssetBrand" class="w-full mt-1 px-3 py-2 border-gray-200 rounded-md bg-gray-100" readonly>
-        </div>
-    </div>
-</div>
-
-                                <div class="md:col-span-2">
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">สถานที่ตั้งอุปกรณ์ (อาคาร/ห้อง) <span class="text-red-500">*</span></label>
-                                    <input type="text" id="equipmentLocation" class="w-full px-3 py-2 border border-gray-300 rounded-md" required placeholder="กรุณาระบุรายละเอียด">
+                                    <label for="inventorySelect" class="block text-sm font-medium text-gray-700 mb-1">เลือกครุภัณฑ์ที่ต้องการแจ้งซ่อม <span class="text-red-500">*</span></label>
+                                    <select id="inventorySelect" name="inventorySelect" class="w-full px-3 py-2 border border-gray-300 rounded-md" required disabled>
+                                        <option value="">กำลังโหลดรายการครุภัณฑ์...</option>
+                                    </select>
                                 </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2 bg-gray-50 p-3 rounded-md">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-500">ประเภท</label>
+                                        <input type="text" id="displayAssetType" class="w-full mt-1 px-3 py-2 border-gray-200 rounded-md bg-gray-100" readonly>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-500">ยี่ห้อ/รุ่น</label>
+                                        <input type="text" id="displayAssetBrand" class="w-full mt-1 px-3 py-2 border-gray-200 rounded-md bg-gray-100" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">สถานที่ตั้งอุปกรณ์ (อาคาร/ห้อง) <span class="text-red-500">*</span></label>
+                                <input type="text" id="equipmentLocation" class="w-full px-3 py-2 border border-gray-300 rounded-md" required placeholder="กรุณาระบุรายละเอียด">
                             </div>
                         </div>
 
                         <div class="mb-6 border-t pt-4">
-                             <h3 class="text-md font-medium text-gray-700 mb-3 flex items-center">
+                            <h3 class="text-md font-medium text-gray-700 mb-3 flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
                                 รายละเอียดปัญหา
                             </h3>
@@ -222,7 +138,7 @@
                         </div>
 
                         <div class="mt-6 border-t pt-4">
-                             <h3 class="text-md font-medium text-gray-700 mb-2 flex items-center">
+                            <h3 class="text-md font-medium text-gray-700 mb-2 flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" viewBox="0 0 20 20" fill="currentColor"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z" /><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.022 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" /></svg>
                                 การยินยอมเกี่ยวกับข้อมูลส่วนบุคคล (PDPA)
                             </h3>
@@ -237,6 +153,11 @@
                                 ส่งแบบฟอร์มแจ้งซ่อม
                             </button>
                         </div>
+
+                        <input type="hidden" id="equipmentType">
+                        <input type="hidden" id="equipmentId">
+                        <input type="hidden" id="equipmentBrand">
+
                     </form>
                 </div>
             </div>
@@ -244,301 +165,235 @@
         </main>
         <footer class="bg-gray-100 border-t border-gray-200 py-4 mt-auto">
             <div class="container mx-auto px-4 text-center text-sm text-gray-600">
-                <p id="footerText">© 2024 ระบบแจ้งซ่อมครุภัณฑ์คอมพิวเตอร์ | ศูนย์เทคโนโลยีสารสนเทศ</p>
+                <p id="footerText">© 2025 Your Organization</p>
             </div>
         </footer>
     </div>
 
     <script>
-    let imageDataBase64 = ""; 
-    let imageFileName = "";
-    let imageMimeType = "";
-    let userInventory = []; // <<< เพิ่มบรรทัดนี้
+        // !!!!!!!!!! ตั้งค่าที่สำคัญ !!!!!!!!!!
+        const LIFF_ID = "2007495650-DVW3AjjM"; // <<<< วาง LIFF ID ของคุณที่นี่
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz3xr8G3JtPxxqD_ZUWg9eXw7GhzjM-aCq8Ce0JwIalrwlzYcWfuxl71DHcusETLfJ0/exec"; // <<<< วาง URL ของ Web App ที่ Deploy แล้วที่นี่
 
-    document.addEventListener('DOMContentLoaded', async function() {
-        const submitButton = document.getElementById('submitButton');
-        const loadingMessage = document.getElementById('loadingMessage');
-        const userInfoSection = document.getElementById('userInfoSection');
-        const displayFullNameInput = document.getElementById('displayFullNameInput');
-        const displayPositionInput = document.getElementById('displayPositionInput');
-        const equipmentLocationInput = document.getElementById('equipmentLocation');
-        const imageUpload = document.getElementById('imageUpload');
-        const imagePreview = document.getElementById('imagePreview');
+        let imageDataBase64 = ""; 
+        let imageFileName = "";
+        let imageMimeType = "";
+        let userInventory = []; // ตัวแปรสำหรับเก็บข้อมูลครุภัณฑ์
 
-        loadingMessage.classList.remove('hidden');
-        submitButton.disabled = true;
+        document.addEventListener('DOMContentLoaded', async function() {
+            const submitButton = document.getElementById('submitButton');
+            const loadingMessage = document.getElementById('loadingMessage');
+            const userInfoSection = document.getElementById('userInfoSection');
+            const imageUpload = document.getElementById('imageUpload');
+            const imagePreview = document.getElementById('imagePreview');
 
-        imageUpload.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                if (!file.type.match('image.*')) {
-                    Swal.fire({icon:'error', title:'ไฟล์ไม่ถูกต้อง', text:'กรุณาเลือกไฟล์รูปภาพเท่านั้น'});
-                    this.value = null; 
-                    imagePreview.classList.add('hidden');
-                    imagePreview.src = "#";
-                    imageDataBase64 = ""; imageFileName = ""; imageMimeType = "";
-                    return;
-                }
-                // Limit file size (e.g., 5MB)
-                if (file.size > 5 * 1024 * 1024) { // 5MB
-                     Swal.fire({icon:'error', title:'ไฟล์ใหญ่เกินไป', text:'กรุณาเลือกไฟล์รูปภาพขนาดไม่เกิน 5MB'});
-                    this.value = null; // Clear the input
-                    imagePreview.classList.add('hidden');
-                    imagePreview.src = "#";
-                    imageDataBase64 = ""; imageFileName = ""; imageMimeType = "";
-                    return;
-                }
-                imageFileName = file.name;
-                imageMimeType = file.type;
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    imagePreview.src = e.target.result;
-                    imageDataBase64 = e.target.result.split(',')[1]; 
-                    imagePreview.classList.remove('hidden');
-                }
-                reader.readAsDataURL(file);
-            } else {
-                imagePreview.classList.add('hidden');
-                imagePreview.src = "#";
-                imageDataBase64 = ""; imageFileName = ""; imageMimeType = "";
-            }
-        });
-
-        try {
-            // !!! ใช้ LIFF ID และ Script URL ที่คุณให้มา !!!
-            await liff.init({ liffId: "2007495650-DVW3AjjM" }); 
-            
-            if (!liff.isLoggedIn()) {
-                loadingMessage.textContent = 'กรุณา Login LINE ก่อนใช้งาน';
-                liff.login({ redirectUri: window.location.href }); 
-                return; 
-            }
-            
-            const profile = await liff.getProfile();
-            document.getElementById('userId').value = profile.userId;
-            document.getElementById('lineDisplayNameFromProfile').value = profile.displayName; 
-            document.getElementById('userDisplayName').textContent = profile.displayName; 
-            document.getElementById('userProfilePic').src = profile.pictureUrl;
-            
-            fetchUserDetails(profile.userId);
-            fetchUserInventory(profile.userId); // <<< เพิ่มบรรทัดนี้
-
-        } catch (err) {
-            loadingMessage.innerHTML = '<p class="text-red-500">เกิดข้อผิดพลาดในการโหลดข้อมูล LIFF: ' + err.message + '</p>';
-            Swal.fire({ icon: 'error', title: 'LIFF Error', text: 'ไม่สามารถโหลดข้อมูลผู้ใช้จาก LINE ได้: ' + err.message });
-            console.error("LIFF Init/Profile Error: ", err);
-            loadingMessage.classList.add('hidden'); 
-        }
-
-        document.getElementById('repairForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            if(submitButton.disabled) return;
-
-            if (!this.checkValidity()) {
-                Swal.fire({ icon: 'error', title: 'ข้อมูลไม่ครบถ้วน', text: 'กรุณากรอกข้อมูลในช่องที่มีเครื่องหมาย * ให้ครบทุกช่อง' });
-                return;
-            }
-            
+            loadingMessage.classList.remove('hidden');
             submitButton.disabled = true;
-            Swal.fire({ title: 'กำลังส่งข้อมูล...', text: 'กรุณารอสักครู่ ระบบกำลังบันทึกและอัปโหลดรูปภาพ (ถ้ามี)', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
 
-            const params = new URLSearchParams();
-            params.append('action', 'requestRepair');
-            params.append('userId', document.getElementById('userId').value);
-            params.append('lineDisplayName', document.getElementById('lineDisplayNameFromProfile').value);
-            params.append('registeredFullName', document.getElementById('registeredFullName').value);
-            params.append('registeredPosition', document.getElementById('registeredPosition').value);
-            params.append('registeredDepartment', document.getElementById('registeredDepartment').value);
-            params.append('contactPhone', document.getElementById('contactPhone').value);
-            params.append('equipmentType', document.getElementById('equipmentType').value);
-            params.append('equipmentId', document.getElementById('equipmentId').value || 'N/A');
-            params.append('equipmentBrand', document.getElementById('equipmentBrand').value || 'N/A');
-            params.append('equipmentLocation', document.getElementById('equipmentLocation').value);
-            params.append('problemDetails', document.getElementById('problemDetails').value);
-            params.append('repairConditionsAccepted', document.getElementById('repairConditionsAccepted').checked.toString());
-            params.append('pdpaConsentRepair', document.getElementById('pdpaConsentRepair').checked.toString());
-
-            // Only append image data if it exists
-            if (imageDataBase64 && imageFileName && imageMimeType) {
-                params.append('imageData', imageDataBase64);
-                params.append('imageFileName', imageFileName);
-                params.append('imageMimeType', imageMimeType);
-            }
-            
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbxFWct6SMwsxmujnWaeoO7prAqvIaZT-DSSz1H--7EmOdNL6zbtpDPnWgyS3teyx6U/exec'; 
-
-            fetch(scriptUrl, {
-                method: 'POST',
-                body: params 
-            })
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(text => {
-                        throw new Error('Network response was not ok. Status: ' + response.status + '. Body: ' + text);
-                    });
+            imageUpload.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    if (!file.type.match('image.*')) {
+                        Swal.fire({icon:'error', title:'ไฟล์ไม่ถูกต้อง', text:'กรุณาเลือกไฟล์รูปภาพเท่านั้น'});
+                        this.value = null; 
+                        imagePreview.classList.add('hidden');
+                        return;
+                    }
+                    if (file.size > 5 * 1024 * 1024) { // 5MB
+                        Swal.fire({icon:'error', title:'ไฟล์ใหญ่เกินไป', text:'กรุณาเลือกไฟล์รูปภาพขนาดไม่เกิน 5MB'});
+                        this.value = null;
+                        imagePreview.classList.add('hidden');
+                        return;
+                    }
+                    imageFileName = file.name;
+                    imageMimeType = file.type;
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        imageDataBase64 = e.target.result.split(',')[1]; 
+                        imagePreview.classList.remove('hidden');
+                    }
+                    reader.readAsDataURL(file);
                 }
-                return response.json();
-            })
-            .then(data => {
-                submitButton.disabled = false;
-                if (data.success) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'ส่งเรื่องแจ้งซ่อมสำเร็จ!',
-                        html: `เลขที่ใบแจ้งซ่อมของคุณคือ: <br><b>${data.ticketId}</b><br>กรุณาใช้เลขนี้ในการติดตามสถานะ` +
-                              (data.imageUrl && data.imageUrl.startsWith("http") ? `<br><br><a href="${data.imageUrl}" target="_blank" class="text-blue-600 hover:underline">ดูรูปภาพที่แนบ</a>` : '')
-                    }).then(() => {
-                        if (liff.isInClient()) {
-                            liff.closeWindow();
-                        } else {
-                            document.getElementById('repairForm').reset();
-                            imagePreview.classList.add('hidden');
-                            imagePreview.src = "#";
-                            imageDataBase64 = ""; imageFileName = ""; imageMimeType = "";
-                            userInfoSection.classList.add('hidden'); 
-                        }
-                    });
-                } else {
-                    Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาดจาก Server', text: data.error || 'ไม่สามารถบันทึกข้อมูลได้' });
-                }
-            })
-            .catch(error => {
-                submitButton.disabled = false;
-                Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาดในการเชื่อมต่อ', text: 'ไม่สามารถส่งข้อมูลได้: ' + error.message });
-                console.error('Fetch Error:', error);
             });
-        });
-// ... โค้ดเดิม ...
 
-// =======================================================
-//  ฟังก์ชันใหม่สำหรับจัดการ Master Inventory
-// =======================================================
-
-function fetchUserInventory(userId) {
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbxFWct6SMwsxmujnWaeoO7prAqvIaZT-DSSz1H--7EmOdNL6zbtpDPnWgyS3teyx6U/exec'; // ใช้ URL เดิมของคุณ
-    const callbackName = 'handleInventoryData';
-    
-    const queryParams = new URLSearchParams({
-        callback: callbackName,
-        action: 'getInventory', // เรียก action ใหม่ที่เราสร้างไว้
-        userId: userId
-    }).toString();
-    
-    const script = document.createElement('script');
-    script.src = `${scriptUrl}?${queryParams}`;
-    document.body.appendChild(script).onerror = () => {
-        console.error("Failed to load user inventory script.");
-        const inventorySelect = document.getElementById('inventorySelect');
-        inventorySelect.innerHTML = '<option value="">ไม่สามารถโหลดรายการได้</option>';
-    };
-}
-
-window.handleInventoryData = function(response) {
-    const inventorySelect = document.getElementById('inventorySelect');
-    if (response.success && response.data && response.data.length > 0) {
-        userInventory = response.data; // เก็บข้อมูลทั้งหมดไว้ในตัวแปร global
-        
-        inventorySelect.innerHTML = '<option value="" disabled selected>-- กรุณาเลือกครุภัณฑ์ --</option>'; // ข้อความเริ่มต้น
-        
-        userInventory.forEach(item => {
-            // สร้าง option สำหรับแต่ละรายการ
-            const option = document.createElement('option');
-            option.value = item.AssetID;
-            option.textContent = `${item.AssetName} (${item.AssetID})`;
-            inventorySelect.appendChild(option);
-        });
-        
-        inventorySelect.disabled = false; // เปิดให้เลือกได้
-    } else {
-        inventorySelect.innerHTML = '<option value="">ไม่พบครุภัณฑ์ที่พร้อมใช้งาน</option>';
-    }
-}
-
-// เพิ่ม Event Listener ให้กับ Dropdown ที่เราสร้างขึ้น
-document.getElementById('inventorySelect').addEventListener('change', function(e) {
-    const selectedAssetId = e.target.value;
-    const selectedItem = userInventory.find(item => item.AssetID === selectedAssetId);
-    
-    if (selectedItem) {
-        // กรอกข้อมูลอัตโนมัติ
-        document.getElementById('displayAssetType').value = selectedItem.AssetType || 'N/A';
-        document.getElementById('displayAssetBrand').value = selectedItem.AssetBrand || 'N/A';
-        
-        // นำข้อมูลไปใส่ใน input ที่จะส่งไปกับฟอร์ม
-        document.getElementById('equipmentType').value = selectedItem.AssetName; // ใช้ชื่อเต็มเป็น equipmentType
-        document.getElementById('equipmentId').value = selectedItem.AssetID;
-        document.getElementById('equipmentBrand').value = selectedItem.AssetBrand;
-    }
-});
-
-// ... โค้ดเดิม ...
-        function fetchUserDetails(userId) {
-            loadingMessage.textContent = 'กำลังดึงข้อมูลผู้ลงทะเบียน...';
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbxFWct6SMwsxmujnWaeoO7prAqvIaZT-DSSz1H--7EmOdNL6zbtpDPnWgyS3teyx6U/exec'; 
-            const callbackName = 'jsonpCallbackUserDetails_' + Date.now(); 
-
-            window[callbackName] = function(response) {
-                const scriptElUser = document.getElementById('jsonp-script-userdetails-' + callbackName);
-                if(scriptElUser) document.body.removeChild(scriptElUser);
-                delete window[callbackName];
-
-                if (response && response.found) {
-                    populateFormWithUserData(response);
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'info',
-                        title: 'ดึงข้อมูลผู้แจ้งสำเร็จ',
-                        showConfirmButton: false,
-                        timer: 2000
-                    });
-                } else {
-                     Swal.fire({icon: 'info', title: 'ไม่พบข้อมูลลงทะเบียน', text: 'ไม่พบข้อมูลการลงทะเบียนเดิม กรุณากรอกข้อมูลด้วยตนเอง'});
+            try {
+                await liff.init({ liffId: "2007495650-DVW3AjjM" }); 
+                
+                if (!liff.isLoggedIn()) {
+                    liff.login({ redirectUri: window.location.href }); 
+                    return; 
                 }
                 
-                loadingMessage.classList.add('hidden');
-                submitButton.disabled = false; 
-            };
+                const profile = await liff.getProfile();
+                document.getElementById('userId').value = profile.userId;
+                document.getElementById('lineDisplayNameFromProfile').value = profile.displayName; 
+                document.getElementById('userDisplayName').textContent = profile.displayName; 
+                document.getElementById('userProfilePic').src = profile.pictureUrl;
+                
+                // เรียกฟังก์ชันเพื่อดึงข้อมูลทั้งสองส่วน
+                fetchUserDetails(profile.userId);
+                fetchUserInventory(profile.userId);
 
-            const queryParams = new URLSearchParams({
-                callback: callbackName,
-                action: 'getUserDetails',
-                userId: userId
-            }).toString();
+            } catch (err) {
+                Swal.fire({ icon: 'error', title: 'LIFF Error', text: 'ไม่สามารถโหลดข้อมูลผู้ใช้จาก LINE ได้: ' + err.message });
+                console.error("LIFF Init/Profile Error: ", err);
+                loadingMessage.classList.add('hidden'); 
+            }
 
-            const script = document.createElement('script');
-            script.id = 'jsonp-script-userdetails-' + callbackName; 
-            script.src = `${scriptUrl}?${queryParams}`;
-            script.onerror = function() {
-                Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาด', text: 'ไม่สามารถดึงข้อมูลผู้ลงทะเบียนได้' });
-                delete window[callbackName];
-                loadingMessage.classList.add('hidden');
-                submitButton.disabled = false; 
-            };
-            document.body.appendChild(script);
-        }
+            document.getElementById('repairForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                if(submitButton.disabled) return;
 
-        function populateFormWithUserData(userData) {
-            if (userData.fullName) {
-                displayFullNameInput.value = userData.fullName;
-                document.getElementById('registeredFullName').value = userData.fullName;
+                if (!this.checkValidity()) {
+                    Swal.fire({ icon: 'error', title: 'ข้อมูลไม่ครบถ้วน', text: 'กรุณากรอกข้อมูลในช่องที่มีเครื่องหมาย * ให้ครบทุกช่อง' });
+                    return;
+                }
+                
+                submitButton.disabled = true;
+                Swal.fire({ title: 'กำลังส่งข้อมูล...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+
+                const params = new URLSearchParams();
+                params.append('action', 'requestRepair');
+                params.append('userId', document.getElementById('userId').value);
+                params.append('lineDisplayName', document.getElementById('lineDisplayNameFromProfile').value);
+                params.append('registeredFullName', document.getElementById('registeredFullName').value);
+                params.append('registeredPosition', document.getElementById('registeredPosition').value);
+                params.append('registeredDepartment', document.getElementById('registeredDepartment').value);
+                params.append('contactPhone', document.getElementById('contactPhone').value);
+                params.append('equipmentType', document.getElementById('equipmentType').value);
+                params.append('equipmentId', document.getElementById('equipmentId').value || 'N/A');
+                params.append('equipmentBrand', document.getElementById('equipmentBrand').value || 'N/A');
+                params.append('equipmentLocation', document.getElementById('equipmentLocation').value);
+                params.append('problemDetails', document.getElementById('problemDetails').value);
+                params.append('repairConditionsAccepted', document.getElementById('repairConditionsAccepted').checked.toString());
+                params.append('pdpaConsentRepair', document.getElementById('pdpaConsentRepair').checked.toString());
+
+                if (imageDataBase64) {
+                    params.append('imageData', imageDataBase64);
+                    params.append('imageFileName', imageFileName);
+                    params.append('imageMimeType', imageMimeType);
+                }
+                
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: params 
+                })
+                .then(response => response.json())
+                .then(data => {
+                    submitButton.disabled = false;
+                    if (data.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'ส่งเรื่องแจ้งซ่อมสำเร็จ!',
+                            html: `เลขที่ใบแจ้งซ่อมของคุณคือ: <br><b>${data.ticketId}</b>`
+                        }).then(() => {
+                            if (liff.isInClient()) {
+                                liff.closeWindow();
+                            }
+                        });
+                    } else {
+                        Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาด', text: data.error || 'ไม่สามารถบันทึกข้อมูลได้' });
+                    }
+                })
+                .catch(error => {
+                    submitButton.disabled = false;
+                    Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาดในการเชื่อมต่อ', text: 'ไม่สามารถส่งข้อมูลได้: ' + error.message });
+                });
+            });
+
+            // =======================================================
+            //  ฟังก์ชันสำหรับจัดการข้อมูลผู้ใช้และครุภัณฑ์
+            // =======================================================
+
+            function fetchUserDetails(userId) {
+                const callbackName = 'jsonpCallbackUserDetails_' + Date.now(); 
+                window[callbackName] = function(response) {
+                    if (response && response.found) {
+                        populateFormWithUserData(response);
+                    }
+                    loadingMessage.classList.add('hidden');
+                    // Enable submit button only if inventory is also loaded
+                    if (!document.getElementById('inventorySelect').disabled) {
+                         submitButton.disabled = false;
+                    }
+                };
+                const queryParams = new URLSearchParams({ callback: callbackName, action: 'getUserDetails', userId: userId }).toString();
+                const script = document.createElement('script');
+                script.src = `${SCRIPT_URL}?${queryParams}`;
+                document.body.appendChild(script);
             }
-            if (userData.position) {
-                displayPositionInput.value = userData.position;
-                document.getElementById('registeredPosition').value = userData.position;
+
+            function populateFormWithUserData(userData) {
+                if (userData.fullName) {
+                    document.getElementById('displayFullNameInput').value = userData.fullName;
+                    document.getElementById('registeredFullName').value = userData.fullName;
+                }
+                if (userData.position) {
+                    document.getElementById('displayPositionInput').value = userData.position;
+                    document.getElementById('registeredPosition').value = userData.position;
+                }
+                if (userData.department) { 
+                    document.getElementById('equipmentLocation').placeholder = `ตัวอย่าง: ${userData.department} ห้อง A101`;
+                    document.getElementById('registeredDepartment').value = userData.department;
+                }
+                if (userData.phone) {
+                    document.getElementById('contactPhone').value = userData.phone;
+                }
+                userInfoSection.classList.remove('hidden'); 
             }
-            if (userData.department) { 
-                // This is the registered department. We'll use it to inform the placeholder.
-                // The user will still type the specific equipment location.
-                equipmentLocationInput.placeholder = `ตัวอย่าง: ${userData.department} ห้อง A101`;
-                document.getElementById('registeredDepartment').value = userData.department;
+            
+            function fetchUserInventory(userId) {
+                const callbackName = 'handleInventoryData';
+                const queryParams = new URLSearchParams({
+                    callback: callbackName,
+                    action: 'getInventory',
+                    userId: userId
+                }).toString();
+                
+                const script = document.createElement('script');
+                script.src = `${SCRIPT_URL}?${queryParams}`;
+                document.body.appendChild(script).onerror = () => {
+                    const inventorySelect = document.getElementById('inventorySelect');
+                    inventorySelect.innerHTML = '<option value="">ไม่สามารถโหลดรายการได้</option>';
+                };
             }
-            if (userData.phone) {
-                document.getElementById('contactPhone').value = userData.phone;
+
+            window.handleInventoryData = function(response) {
+                const inventorySelect = document.getElementById('inventorySelect');
+                if (response.success && response.data && response.data.length > 0) {
+                    userInventory = response.data;
+                    inventorySelect.innerHTML = '<option value="" disabled selected>-- กรุณาเลือกครุภัณฑ์ --</option>'; 
+                    userInventory.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.AssetID;
+                        option.textContent = `${item.AssetName} (${item.AssetID})`;
+                        inventorySelect.appendChild(option);
+                    });
+                    inventorySelect.disabled = false;
+                } else {
+                    inventorySelect.innerHTML = '<option value="">ไม่พบครุภัณฑ์ที่พร้อมใช้งาน</option>';
+                }
+                // Enable submit button only if user details are also loaded
+                 if (!userInfoSection.classList.contains('hidden')) {
+                     submitButton.disabled = false;
+                }
             }
-            userInfoSection.classList.remove('hidden'); 
-        }
-    }); 
+
+            document.getElementById('inventorySelect').addEventListener('change', function(e) {
+                const selectedAssetId = e.target.value;
+                const selectedItem = userInventory.find(item => item.AssetID === selectedAssetId);
+                
+                if (selectedItem) {
+                    document.getElementById('displayAssetType').value = selectedItem.AssetType || 'N/A';
+                    document.getElementById('displayAssetBrand').value = selectedItem.AssetBrand || 'N/A';
+                    
+                    document.getElementById('equipmentType').value = selectedItem.AssetName;
+                    document.getElementById('equipmentId').value = selectedItem.AssetID;
+                    document.getElementById('equipmentBrand').value = selectedItem.AssetBrand;
+                }
+            });
+        }); 
     </script>
 </body>
 </html>
