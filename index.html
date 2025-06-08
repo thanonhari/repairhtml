@@ -253,6 +253,7 @@
     let imageDataBase64 = ""; 
     let imageFileName = "";
     let imageMimeType = "";
+    let userInventory = []; // <<< เพิ่มบรรทัดนี้
 
     document.addEventListener('DOMContentLoaded', async function() {
         const submitButton = document.getElementById('submitButton');
@@ -320,6 +321,7 @@
             document.getElementById('userProfilePic').src = profile.pictureUrl;
             
             fetchUserDetails(profile.userId);
+            fetchUserInventory(profile.userId); // <<< เพิ่มบรรทัดนี้
 
         } catch (err) {
             loadingMessage.innerHTML = '<p class="text-red-500">เกิดข้อผิดพลาดในการโหลดข้อมูล LIFF: ' + err.message + '</p>';
@@ -406,7 +408,70 @@
                 console.error('Fetch Error:', error);
             });
         });
+// ... โค้ดเดิม ...
 
+// =======================================================
+//  ฟังก์ชันใหม่สำหรับจัดการ Master Inventory
+// =======================================================
+
+function fetchUserInventory(userId) {
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbxFWct6SMwsxmujnWaeoO7prAqvIaZT-DSSz1H--7EmOdNL6zbtpDPnWgyS3teyx6U/exec'; // ใช้ URL เดิมของคุณ
+    const callbackName = 'handleInventoryData';
+    
+    const queryParams = new URLSearchParams({
+        callback: callbackName,
+        action: 'getInventory', // เรียก action ใหม่ที่เราสร้างไว้
+        userId: userId
+    }).toString();
+    
+    const script = document.createElement('script');
+    script.src = `${scriptUrl}?${queryParams}`;
+    document.body.appendChild(script).onerror = () => {
+        console.error("Failed to load user inventory script.");
+        const inventorySelect = document.getElementById('inventorySelect');
+        inventorySelect.innerHTML = '<option value="">ไม่สามารถโหลดรายการได้</option>';
+    };
+}
+
+window.handleInventoryData = function(response) {
+    const inventorySelect = document.getElementById('inventorySelect');
+    if (response.success && response.data && response.data.length > 0) {
+        userInventory = response.data; // เก็บข้อมูลทั้งหมดไว้ในตัวแปร global
+        
+        inventorySelect.innerHTML = '<option value="" disabled selected>-- กรุณาเลือกครุภัณฑ์ --</option>'; // ข้อความเริ่มต้น
+        
+        userInventory.forEach(item => {
+            // สร้าง option สำหรับแต่ละรายการ
+            const option = document.createElement('option');
+            option.value = item.AssetID;
+            option.textContent = `${item.AssetName} (${item.AssetID})`;
+            inventorySelect.appendChild(option);
+        });
+        
+        inventorySelect.disabled = false; // เปิดให้เลือกได้
+    } else {
+        inventorySelect.innerHTML = '<option value="">ไม่พบครุภัณฑ์ที่พร้อมใช้งาน</option>';
+    }
+}
+
+// เพิ่ม Event Listener ให้กับ Dropdown ที่เราสร้างขึ้น
+document.getElementById('inventorySelect').addEventListener('change', function(e) {
+    const selectedAssetId = e.target.value;
+    const selectedItem = userInventory.find(item => item.AssetID === selectedAssetId);
+    
+    if (selectedItem) {
+        // กรอกข้อมูลอัตโนมัติ
+        document.getElementById('displayAssetType').value = selectedItem.AssetType || 'N/A';
+        document.getElementById('displayAssetBrand').value = selectedItem.AssetBrand || 'N/A';
+        
+        // นำข้อมูลไปใส่ใน input ที่จะส่งไปกับฟอร์ม
+        document.getElementById('equipmentType').value = selectedItem.AssetName; // ใช้ชื่อเต็มเป็น equipmentType
+        document.getElementById('equipmentId').value = selectedItem.AssetID;
+        document.getElementById('equipmentBrand').value = selectedItem.AssetBrand;
+    }
+});
+
+// ... โค้ดเดิม ...
         function fetchUserDetails(userId) {
             loadingMessage.textContent = 'กำลังดึงข้อมูลผู้ลงทะเบียน...';
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbxFWct6SMwsxmujnWaeoO7prAqvIaZT-DSSz1H--7EmOdNL6zbtpDPnWgyS3teyx6U/exec'; 
