@@ -387,6 +387,8 @@
                 if (selectedItem) {
                     document.getElementById('displayAssetType').value = selectedItem.AssetType || 'N/A';
                     document.getElementById('displayAssetBrand').value = selectedItem.AssetBrand || 'N/A';
+                    document.getElementById('equipmentLocation').value = selectedItem.CurrentLocation || ''; // <<< เพิ่มบรรทัดนี้
+
                     
                     document.getElementById('equipmentType').value = selectedItem.AssetName;
                     document.getElementById('equipmentId').value = selectedItem.AssetID;
